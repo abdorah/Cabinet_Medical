@@ -7,7 +7,7 @@
     </div>
 
     <div class="header__img">
-        <img src="assets/img/perfil.jpg" alt="">
+        <img src="images/perfil.jpg" alt="">
     </div>
 </header>
 
