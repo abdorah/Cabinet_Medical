@@ -30,7 +30,7 @@
                         <h5>Créer votre compte</h5>
                         <form class="pt-4" method="POST" action="Register">
                             <div class="d-flex flex-column pb-3"> <label for="lastName">Nom</label> <input type="text" name="lastName" id="" class="border-bottom border-primary" placeholder="Saisir votre nom ici" required="required"> </div>
-                            <div class="d-flex flex-column pb-3"> <label for="fristName">Prénom</label> <input type="text" name="fristName" id="" class="border-bottom border-primary" placeholder="Saisir votre prénom ici" required="required"> </div>
+                            <div class="d-flex flex-column pb-3"> <label for="firstName">Prénom</label> <input type="text" name="fristName" id="" class="border-bottom border-primary" placeholder="Saisir votre prénom ici" required="required"> </div>
                             <div class="d-flex flex-column pb-3"> <label for="phone">Télephone</label> <input type="text" name="phone" id="" class="border-bottom border-primary" placeholder="Saisir votre télephone ici" required="required"> </div>
                            <div class="d-flex flex-column pb-3"> <label for="email">Adresse Email</label> <input type="email" name="email" id="emailId" class="border-bottom border-primary" placeholder="Saisir votre email ici" required="required"> </div>
                             <div class="d-flex flex-column pb-3"> <label for="password">Mot de passe</label> <input type="password" name="password" id="pwd" class="border-bottom border-primary" placeholder="Saisir votre mot de passe ici" required="required"> </div>
