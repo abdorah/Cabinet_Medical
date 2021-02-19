@@ -3,6 +3,7 @@ package com.javaBeans;
 public class User {
 	
 	private int id;
+	private String cin;
 	private String firstName;
 	private String lastName;
 	private String phone;
@@ -13,14 +14,31 @@ public class User {
 		
 	}
 	
-	public User(int id,String firstName,String lastName,String phone,String email,String password) {
+	public User(int id,String cin,String firstName,String lastName,String phone,String email,String password) {
 		this.id=id;
+		this.cin=cin;
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.phone=phone;
 		this.email=email;
 		this.password=password;
 		
+	}
+
+	public String getCin() {
+		return cin;
+	}
+
+	public void setCin(String cin) {
+		this.cin = cin;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public int getId() {
@@ -31,13 +49,7 @@ public class User {
 		this.id = id;
 	}
 
-	public String getFristName() {
-		return firstName;
-	}
-
-	public void setFristName(String fristName) {
-		this.firstName = fristName;
-	}
+	
 
 	public String getLastName() {
 		return lastName;
