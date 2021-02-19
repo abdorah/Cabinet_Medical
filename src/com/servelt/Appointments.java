@@ -1,4 +1,4 @@
-package com.servlets;
+package com.servelt;
 
 import java.io.IOException;
 import java.sql.Date;
