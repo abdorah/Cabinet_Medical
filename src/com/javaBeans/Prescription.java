@@ -1,31 +1,24 @@
 package com.javaBeans;
 
-import java.sql.Date;
-import java.util.ArrayList;
+
 
 public class Prescription {
-	private int id;
+	private int id_prescription;
 	private String title;
-	private Date dateOfPresc;
+	private String dateOfPrescription;
 	private String description;
-	private ArrayList<Medication> medicationList;
+	private String medicationList;
 	
-	public Prescription(int id, String title, Date dateOfPresc, String description,
-			ArrayList<Medication> medicationList) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.dateOfPresc = dateOfPresc;
-		this.description = description;
-		this.medicationList = medicationList;
-	}
-	
-	public int getId() {
-		return id;
+	public Prescription() {
+		
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public int getId_prescription() {
+		return id_prescription;
+	}
+
+	public void setId_prescription(int id_prescription) {
+		this.id_prescription = id_prescription;
 	}
 
 	public String getTitle() {
@@ -36,12 +29,12 @@ public class Prescription {
 		this.title = title;
 	}
 
-	public Date getDateOfPresc() {
-		return dateOfPresc;
+	public String getDateOfPrescription() {
+		return dateOfPrescription;
 	}
 
-	public void setDateOfPresc(Date dateOfPresc) {
-		this.dateOfPresc = dateOfPresc;
+	public void setDateOfPrescription(String dateOfPrescription) {
+		this.dateOfPrescription = dateOfPrescription;
 	}
 
 	public String getDescription() {
@@ -52,13 +45,16 @@ public class Prescription {
 		this.description = description;
 	}
 
-	public ArrayList<Medication> getMedicationList() {
+	public String getMedicationList() {
 		return medicationList;
 	}
 
-	public void setMedicationList(ArrayList<Medication> medicationList) {
+	public void setMedicationList(String medicationList) {
 		this.medicationList = medicationList;
 	}
 
+	
+	
+	
 
 }

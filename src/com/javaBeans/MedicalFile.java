@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class MedicalFile {
 	private int id;
 	private Patient patient;
+	private ArrayList<Appointment> appointmentList;
 	private ArrayList<Consultation> consultationList;
 	
 	
-	public MedicalFile(int id, Patient patient, ArrayList<Consultation> consultationList) {
-		this.id = id;
-		this.patient = patient;
-		this.consultationList = consultationList;
+	public MedicalFile() {
+		setAppointmentList(new ArrayList<Appointment>());
+		consultationList = new ArrayList<Consultation>();
 	}
 	public int getId() {
 		return id;
@@ -30,6 +30,12 @@ public class MedicalFile {
 	}
 	public void setConsultationList(ArrayList<Consultation> consultationList) {
 		this.consultationList = consultationList;
+	}
+	public ArrayList<Appointment> getAppointmentList() {
+		return appointmentList;
+	}
+	public void setAppointmentList(ArrayList<Appointment> appointmentList) {
+		this.appointmentList = appointmentList;
 	}
 	
 	
