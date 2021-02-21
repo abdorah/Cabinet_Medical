@@ -30,6 +30,12 @@
                     <div class="mt-3 mt-md-5">
                         <h5>Connectez-vous à votre compte</h5>
                         <form class="pt-4" method="POST" action="Login">
+                        	<style>
+                        		label{
+                        			font-weight: bold;
+                        		}
+                        	
+                        	</style>
                             <div class="d-flex flex-column pb-3"> <label for="email">Adresse Email</label> <input type="email" name="email" id="emailId" class="border-bottom border-primary" placeholder="Saisir votre email ici" required="required"> </div>
                             <div class="d-flex flex-column pb-3"> <label for="password">Mot de passe</label> <input type="password" name="password" id="pwd" class="border-bottom border-primary" onpaste="return false;" placeholder="Saisir votre mot de passe ici" required="required"> </div>
                             <div class="d-flex jusity-content-end pb-4">
@@ -42,7 +48,7 @@
                             </div>
                             <!-- <button class="btn btn-block bg-white border border-primary rounded "><span class="fa fa-facebook-official text-primary px-2"></span>Log In with Facebook</button>-->
                             <div class="register mt-5">
-                                <p>Vous n'avez pas de compte? <a href="Register">Céer un compte</a></p>
+                                <p>Vous n'avez pas de compte? <a href="Register">Créer un compte</a></p>
                             </div>
                         </form>
                     </div>

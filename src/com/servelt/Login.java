@@ -49,7 +49,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				String message = "Email et/ou Mot de passe incorrect(s)";
                 request.setAttribute("message", message);
                 doGet(request, response);
-                //this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                
 			}
 		} catch (SQLException e) {
 			

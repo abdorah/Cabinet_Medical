@@ -2,20 +2,21 @@ package com.javaBeans;
 
 public class User {
 	
-	private int id;
+	private int id_user;
 	private String cin;
 	private String firstName;
 	private String lastName;
 	private String phone;
 	private String email;
 	private String password;
+	private String accountType;
 	
 	public User() {
 		
 	}
 	
-	public User(int id,String cin,String firstName,String lastName,String phone,String email,String password) {
-		this.id=id;
+	public User(int id_user,String cin,String firstName,String lastName,String phone,String email,String password) {
+		this.id_user=id_user;
 		this.cin=cin;
 		this.firstName=firstName;
 		this.lastName=lastName;
@@ -41,12 +42,12 @@ public class User {
 		this.firstName = firstName;
 	}
 
-	public int getId() {
-		return id;
+	public int getId_user() {
+		return id_user;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId_user(int id) {
+		this.id_user = id;
 	}
 
 	
@@ -81,6 +82,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 	
 

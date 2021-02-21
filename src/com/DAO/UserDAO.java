@@ -11,24 +11,27 @@ public class UserDAO implements UserService {
 	
 	private DbConfigDAO dbInstance;
 	private Connection connection;
-	private PreparedStatement preStat;
-	private ResultSet result;
-	private String query;
+
 	
 	public UserDAO() {
 		dbInstance=DbConfigDAO.getInstance();
+		try {
+			connection = dbInstance.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	//for login:
 	@Override
 	public User checkLogin(String email, String password) throws SQLException {
 		
-		query = "SELECT * FROM user WHERE email = ? and password = ?";
-		this.connection=dbInstance.getConnection();
-		preStat = connection.prepareStatement(query);
+		String query = "SELECT * FROM user WHERE email = ? and password = ?";
+		PreparedStatement preStat = connection.prepareStatement(query);
 		preStat.setString(1,email);
 		preStat.setString(2,password);
-		result = preStat.executeQuery();
+		ResultSet result = preStat.executeQuery();
 		
 		User user = null;
 		
@@ -37,33 +40,43 @@ public class UserDAO implements UserService {
 			String firstName = result.getString("firstName");
 			String lastName = result.getString("lastName");
 			String phone = result.getString("phone");
+			String cin = result.getString("cin");
 			
-			user = new User(id,firstName,lastName,phone,email,password);
+			user = new User(id,cin,firstName,lastName,phone,email,password);
 		}
 		connection.close();
 		return user;
 	}
 	//for register:
 	@Override
-	public boolean isExist(String email) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isExist(String email,String cin) throws SQLException {
+		boolean exist = true;
+		String query = "SELECT ID FROM USER WHERE email = ? and cin = ?";
+		PreparedStatement preStat = connection.prepareStatement(query);
+		preStat.setString(1, email);
+		preStat.setString(2, cin);
+		ResultSet resultSet = preStat .executeQuery();
+		
+		exist = resultSet.next() ? true : false ;
+		preStat .close();
+			
+		return exist ;
 	}
 
 	@Override
 	public int register(User user) throws SQLException {
 	
 			// connect to data base
-			connection = dbInstance.getConnection();
+			
 
 			//prepare statements
 			String insertQuery = "INSERT INTO USER (firstName,lastName,phone,email,password) VALUES (?,?,?,?,?)";
 			String maxQuery = "SELECT MAX(id) AS MID FROM USER";
-			preStat = connection.prepareStatement(insertQuery);
+			PreparedStatement preStat = connection.prepareStatement(insertQuery);
 			PreparedStatement ms = connection.prepareStatement(maxQuery);
 			
 			//set attributes
-			preStat.setString(1, user.getFristName());
+			preStat.setString(1, user.getFirstName());
 			preStat.setString(2, user.getLastName());
 			preStat.setString(3, user.getPhone());
 			preStat.setString(4, user.getEmail());
@@ -76,7 +89,7 @@ public class UserDAO implements UserService {
 			
 			ResultSet resultSet = ms.executeQuery();
 			if (resultSet.next()) {
-				user.setId(resultSet.getInt("MID"));
+				user.setId_user(resultSet.getInt("MID"));
 			}
 			
 			// close statement

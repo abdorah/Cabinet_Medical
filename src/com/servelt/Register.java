@@ -37,11 +37,14 @@ public class Register extends HttpServlet {
 		String password=request.getParameter("password");
 		
 		User user =new User();
+		
 		user.setEmail(email);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setPhone(phone);
 		user.setCin(cin);
+		user.setPassword(password);
+		
 		UserDAO userDAO = new UserDAO();
 	
 		try {

@@ -2,7 +2,7 @@ package com.javaBeans;
 
 public class Patient extends User{
 	
-	private String BirthDate;
+	private String birthDate;
 	private String sex;
 	private MedicalFile medicalFile;
 	
@@ -32,11 +32,11 @@ public class Patient extends User{
 	}
 
 	public String getBirthDate() {
-		return BirthDate;
+		return birthDate;
 	}
 
 	public void setBirthDate(String birthDate) {
-		BirthDate = birthDate;
+		this.birthDate = birthDate;
 	}
 
 }
