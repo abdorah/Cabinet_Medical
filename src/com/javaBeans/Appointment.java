@@ -1,3 +1,4 @@
+
 package com.javaBeans;
 
 public class Appointment {
@@ -71,3 +72,4 @@ public class Appointment {
 	
 
 }
+

@@ -1,3 +1,4 @@
+
 package com.DAO;
 
 import java.sql.Connection;
@@ -6,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.javaBeans.Appointment;
 
@@ -87,5 +89,24 @@ public class AppointmentDAO implements AppointmentService {
 		boolean isDelete = state == 0 ? false : true;
 		return isDelete;
 	}
+	
+	public void takeAppointment(Appointment appointment) throws SQLException {
+        String query = "insert into Appointment(DateofChecking, DateofAppointment, id_patient, TypeofIllness, Description, notification) values(?,?,?,?,?,?);";
+        PreparedStatement preStat = connection.prepareStatement(query);
+        preStat.setDate(1, (Date) appointment.getDateofChecking());
+        preStat.setDate(2, (Date) appointment.getDateofAppointment());
+        preStat.setInt(3, appointment.getPatient());
+        preStat.setString(4, appointment.getTypeofIllness());
+        preStat.setString(5, appointment.getReason());
+        preStat.setBoolean(6, appointment.isNotification());
+        preStat.execute();
+        Statement statement = connection.createStatement();
+        result = statement.executeQuery(
+                "select  id from Appointment where id_patient=" + "'" + appointment.getPatient() + "'" + ";");
+        int id = 0;
+        while (result.next()) {
+            id = result.getInt("id");
+        }
+    }
 
 }
