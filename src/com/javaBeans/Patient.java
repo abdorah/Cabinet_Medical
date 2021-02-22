@@ -14,6 +14,12 @@ public class Patient extends User{
 		super(id,cin,firstName,lastName,phone,email, password);
 			
 	}
+	
+	public Patient(int id, String cin, String firstName, String lastName, String phone, String email, String password, String birthDate, String sex) {
+		super(id,cin,firstName,lastName,phone,email, password);
+		this.birthDate = birthDate;
+		this.sex = sex;
+	}
 
 	public MedicalFile getMedicalFile() {
 		return medicalFile;
