@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.DAO.AppointmentDAO;
+import com.DAO.ConsultationDAO;
 import com.DAO.MedicalFileDAO;
 import com.javaBeans.MedicalFile;
 
@@ -46,20 +47,40 @@ public class MedicalFileS extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id_appointment = Integer.parseInt(request.getParameter("id"));
 		
-		AppointmentDAO appointmentDao = new AppointmentDAO();
-		
-		try {
-			boolean isDelete = appointmentDao.deleteAppointmentById(id_appointment);
-			doGet(request, response);
-		} catch (SQLException e) {
+		if(request.getParameter("id_appointment") != null) {
+			int id_appointment = Integer.parseInt(request.getParameter("id_appointment"));
 			
-			e.printStackTrace();
+			
+			AppointmentDAO appointmentDao = new AppointmentDAO();
+			
+			try {
+				boolean isDelete = appointmentDao.deleteAppointmentById(id_appointment);
+				doGet(request, response);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+		}else if(request.getParameter("id_consultation") != null){
+			int id_consultation = Integer.parseInt(request.getParameter("id_consultation"));
+			
+			
+			ConsultationDAO consultationDao = new ConsultationDAO();
+			
+			try {
+				boolean isDelete1 = consultationDao.deleteConsultationById(id_consultation);
+				doGet(request, response);
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
 		}
 		
 		
-		doGet(request, response);
+		
+		
 	}
 
 }

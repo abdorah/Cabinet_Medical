@@ -7,9 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 import com.javaBeans.Appointment;
+
 
 
 
@@ -91,7 +92,7 @@ public class AppointmentDAO implements AppointmentService {
 	}
 	
 	public void takeAppointment(Appointment appointment) throws SQLException {
-        String query = "insert into Appointment(DateofChecking, DateofAppointment, id_patient, TypeofIllness, Description, notification) values(?,?,?,?,?,?);";
+        /*String query = "insert into Appointment(DateofChecking, DateofAppointment, id_patient, TypeofIllness, Description, notification) values(?,?,?,?,?,?);";
         PreparedStatement preStat = connection.prepareStatement(query);
         preStat.setDate(1, (Date) appointment.getDateofChecking());
         preStat.setDate(2, (Date) appointment.getDateofAppointment());
@@ -106,7 +107,7 @@ public class AppointmentDAO implements AppointmentService {
         int id = 0;
         while (result.next()) {
             id = result.getInt("id");
-        }
+        }*/
     }
 
 }

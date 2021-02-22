@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.javaBeans.Prescription;
 
 public class PrescriptionDAO implements PrescriptionService{
@@ -46,6 +45,32 @@ public class PrescriptionDAO implements PrescriptionService{
 		
 		
 		return prescription;
+	}
+
+	@Override
+	public int addPrescription(Prescription prescription) throws SQLException {
+		String query = "INSERT INTO prescription(title,dateOfPrescription,description,medicationList) VALUES (?,?,?,?)";
+		connection = dbInstance.getConnection();
+		PreparedStatement preStat = connection.prepareStatement(query);
+		preStat.setString(1, prescription.getTitle());
+		preStat.setString(2, prescription.getDateOfPrescription());
+		preStat.setString(3, prescription.getDescription());
+		preStat.setString(4, prescription.getMedicationList());
+		
+		int result = preStat.executeUpdate();
+		
+		if(result != 0) {
+			String maxIdQuery = "SELECT MAX(id_prescription) FROM prescription";
+			PreparedStatement preStatMax = connection.prepareStatement(maxIdQuery);
+			ResultSet maxId = preStatMax.executeQuery();
+			maxId.next();
+			
+			return maxId.getInt("MAX(id_prescription)");
+		}
+		else {
+			return 0;
+		}
+		
 	}
 
 }

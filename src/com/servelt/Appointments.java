@@ -1,10 +1,8 @@
 package com.servelt;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.DAO.AppointmentDAO;
-import com.javaBeans.Appointment;
-import com.javaBeans.User;
+
 
 @WebServlet("/Appointments")
 public class Appointments extends HttpServlet {
@@ -33,7 +29,7 @@ public class Appointments extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AppointmentDAO appointmentDao = new AppointmentDAO();
+       /* AppointmentDAO appointmentDao = new AppointmentDAO();
         Appointment appointment = null;
 
         String timeofAppointment;
@@ -62,6 +58,6 @@ public class Appointments extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/WEB-INF/New-Appointment.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }
