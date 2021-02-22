@@ -1,4 +1,4 @@
-FROM tomcat:8.0.41-jre8
+FROM tomcat:latest
 
 COPY ./target /usr/local/tomcat/webapps/webapp
 
