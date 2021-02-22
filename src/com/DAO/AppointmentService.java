@@ -12,8 +12,7 @@ public interface AppointmentService {
 	public Appointment getAppointmentById(int id) throws SQLException;
 	public ArrayList<Appointment> getAllAppointmentById(int id_patient) throws SQLException;
 	public boolean deleteAppointmentById(int id) throws SQLException;
-	public void takeAppointment(Appointment appointment) throws SQLException;
-
+	public int takeAppointment(Appointment appointment) throws SQLException;
 }
 
 
