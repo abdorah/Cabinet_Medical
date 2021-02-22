@@ -41,8 +41,10 @@ public class UserDAO implements UserService {
 			String lastName = result.getString("lastName");
 			String phone = result.getString("phone");
 			String cin = result.getString("cin");
+			String  accountType = result.getString("accountType");
 			
 			user = new User(id,cin,firstName,lastName,phone,email,password);
+			user.setAccountType(accountType);
 		}
 		connection.close();
 		return user;
