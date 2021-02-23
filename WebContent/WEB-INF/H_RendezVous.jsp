@@ -16,7 +16,7 @@
      <!--lien dataTable.css-->
      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 
-     <title>Liste Rendez-Vous</title>
+     <title>Liste Rendez-Vous H</title>
     </head>
 
     <%@ page import = "com.javaBeans.Appointment" %>
@@ -44,19 +44,18 @@
 			}
 		}
 	%>
-    
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
         <p class="mb-4">
-        	Voici Tout les Rendez-Vous  
+        	Voici tous les rendez-vous déjà pris
         </p>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">les Rendez-Vous</h6>
+                <h6 class="m-0 font-weight-bold text-primary">les Rendez-Vous pris</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -85,9 +84,9 @@
                                 <td><%= appointment.getTypeofIllness()%></td>
                                 <td>					        
 					                
-					                <form action="/CabinetMedicale/RendezVous" method="POST">						            
-					                	<input type="hidden" name="id" value="<%= appointment.getId_appointment() %>" />	
-					                	<input type="hidden" name="type" value="A" />
+					                <form action="/Cabinet/RendezVous" method="POST">						            
+					                	<input type="hidden" name="id" value="<%= appointment.getId_appointment() %>" />
+					                	<input type="hidden" name="type" value="H" />	
 					                	<button class="btn btn-danger" type="submit"><i class="fas fa-calendar-times"></i></button>				                	
 					                </form>
 					                
@@ -131,4 +130,3 @@
 
     </body>
 </html>
-    

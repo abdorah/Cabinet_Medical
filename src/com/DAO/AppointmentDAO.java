@@ -106,8 +106,6 @@ public class AppointmentDAO implements AppointmentService {
 		return id;
     }
 
-	
-
 	@Override
 	public int SupprimerAppointmentPatient(int id_p) throws SQLException {
 
@@ -146,6 +144,7 @@ public class AppointmentDAO implements AppointmentService {
 		
 		while(result.next()) {
 			int id_patient= result.getInt("id_patient");
+			String cin=result.getString("cin");
 			String firstName=result.getString("firstName");
 			String lastName=result.getString("lastName");
 			String phone=result.getString("phone");
@@ -154,7 +153,7 @@ public class AppointmentDAO implements AppointmentService {
 			String birthDate= result.getString("birthDate");
 			String sex=result.getString("sex");
 
-			patient = new Patient(id_patient, firstName, lastName, phone, email, password, birthDate, sex);
+			patient = new Patient(id_patient, cin, firstName, lastName, phone, email, password, birthDate, sex);
 			
 			int id_appointment= result.getInt("id_appointment");
 			String dateofChecking=result.getString("DateofChecking");
@@ -186,6 +185,7 @@ public class AppointmentDAO implements AppointmentService {
 		
 		while(result.next()) {
 			int id_patient= result.getInt("id_patient");
+			String cin=result.getString("cin");
 			String firstName=result.getString("firstName");
 			String lastName=result.getString("lastName");
 			String phone=result.getString("phone");
@@ -194,7 +194,7 @@ public class AppointmentDAO implements AppointmentService {
 			String birthDate= result.getString("birthDate");
 			String sex=result.getString("sex");
 
-			patient = new Patient(id_patient, firstName, lastName, phone, email, password, birthDate, sex);
+			patient = new Patient(id_patient, cin, firstName, lastName, phone, email, password, birthDate, sex);
 			
 			int id_appointment= result.getInt("id_appointment");
 			String dateofChecking=result.getString("DateofChecking");
