@@ -14,4 +14,8 @@ public interface AppointmentService {
 	public boolean deleteAppointmentById(int id) throws SQLException;
 
 	public int takeAppointment(Appointment appointment) throws SQLException;
+	
+	public ArrayList<Appointment> ListeAppointmentNF() throws SQLException;
+	public int SupprimerAppointmentPatient(int id_p) throws SQLException;
+	public ArrayList<Appointment> ListeAppointmentF() throws SQLException;
 }

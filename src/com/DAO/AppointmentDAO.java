@@ -4,14 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
-import java.util.Date;
-
-import java.sql.Statement;
-import java.util.ArrayList;
-
 import com.javaBeans.Appointment;
+import java.sql.Statement;
 import com.javaBeans.Patient;
 
 public class AppointmentDAO implements AppointmentService {
@@ -82,8 +77,8 @@ public class AppointmentDAO implements AppointmentService {
 
 		boolean isDelete = state == 0 ? false : true;
 		return isDelete;
-	}
 
+	}
 	@Override
 	public int takeAppointment(Appointment appointment) throws SQLException {
 		String query = "insert into appointment(DateofChecking, DateofAppointment, id_patient, TypeofIllness, Description, notification) values(NOW(),?,?,?,?,?);";
@@ -96,7 +91,7 @@ public class AppointmentDAO implements AppointmentService {
 		preStat.setString(3, appointment.getTypeofIllness());
 		preStat.setString(4, appointment.getDescription());
 		preStat.setInt(5, appointment.isNotification() ? 1 : 0);
-
+		
 		preStat.execute();
 
 		Statement statement = connection.createStatement();
@@ -109,8 +104,11 @@ public class AppointmentDAO implements AppointmentService {
 			id = result.getInt("id_appointment");
 		}
 		return id;
-	}
+    }
+
 	
+
+	@Override
 	public int SupprimerAppointmentPatient(int id_p) throws SQLException {
 
 	    PreparedStatement preStat;
@@ -130,7 +128,7 @@ public class AppointmentDAO implements AppointmentService {
 		return 0;
 	}
 	
-	   
+	@Override 
 	public ArrayList<Appointment> ListeAppointmentNF() throws SQLException {
 			
 	    PreparedStatement preStat;
@@ -170,7 +168,7 @@ public class AppointmentDAO implements AppointmentService {
 		}
 		return appointments;
 	}
-	
+	@Override
 	public ArrayList<Appointment> ListeAppointmentF() throws SQLException {
 		
 	    PreparedStatement preStat;
