@@ -7,7 +7,10 @@
     else homeData = new HomeData();
 %>
 <!DOCTYPE html>
+
+<%@ page import = "com.javaBeans.User" %>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,8 +24,13 @@
 
 
     </head>
+    
+    <%
+		User user = (User) session.getAttribute("user");
+	%>
     <body id="body-pd">
     	<%@ include file="side-bar.jsp" %>
+    	
     	
     	<div class="container-fluid" style="padding-top:5rem;">
             <!-- Page Heading -->

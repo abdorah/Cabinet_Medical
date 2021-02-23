@@ -1,40 +1,80 @@
+
 package com.javaBeans;
 
-import java.sql.Date;
-
 public class Appointment {
-	private int id;
-	private Date date;
-	private String reason;
-	private Doctor doctor;
+	private int id_appointment;
+	private String dateofChecking;
+	private String dateofAppointment;
+	private String description;
+	private String typeofIllness;
+	private boolean notification;
 	private Patient patient;
-	public int getId() {
-		return id;
+
+	public Appointment(String dateofAppointment, String description, String typeofIllness, boolean notification,
+			Patient patient) {
+		this.dateofAppointment = dateofAppointment;
+		this.description = description;
+		this.typeofIllness = typeofIllness;
+		this.notification = notification;
+		this.patient = patient;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public Appointment() {
+		
 	}
-	public Date getDate() {
-		return date;
+
+	public int getId_appointment() {
+		return id_appointment;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+
+	public void setId_appointment(int id_appointment) {
+		this.id_appointment = id_appointment;
 	}
-	public String getReason() {
-		return reason;
+
+	public String getDateofChecking() {
+		return dateofChecking;
 	}
-	public void setReason(String reason) {
-		this.reason = reason;
+
+	public void setDateofChecking(String dateofChecking) {
+		this.dateofChecking = dateofChecking;
 	}
-	public Doctor getDoctor() {
-		return doctor;
+
+	public String getDateofAppointment() {
+		return dateofAppointment;
 	}
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
+
+	public void setDateofAppointment(String dateofAppointment) {
+		this.dateofAppointment = dateofAppointment;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getTypeofIllness() {
+		return typeofIllness;
+	}
+
+	public void setTypeofIllness(String typeofIllness) {
+		this.typeofIllness = typeofIllness;
+	}
+
+	public boolean isNotification() {
+		return notification;
+	}
+
+	public void setNotification(boolean notification) {
+		this.notification = notification;
+	}
+
 	public Patient getPatient() {
 		return patient;
 	}
+
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}

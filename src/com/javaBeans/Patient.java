@@ -1,25 +1,42 @@
 package com.javaBeans;
 
-import java.util.ArrayList;
-
 public class Patient extends User{
-
-	private ArrayList<Appointment> appointmentList;
-	//private DossierMedical dossier;
 	
-	public Patient(int id, String firstName, String lastName, String phone,String specialty ,String email, String password) {
-		super(id,firstName,lastName,phone,email, password);
-		appointmentList=new ArrayList<Appointment>();
-		
+	private String birthDate;
+	private String sex;
+	private MedicalFile medicalFile;
+	
+	public Patient() {
 		
 	}
-
-	public ArrayList<Appointment> getAppointmentList() {
-		return appointmentList;
+	
+	public Patient(int id,String cin,String firstName, String lastName, String phone,String specialty ,String email, String password) {
+		super(id,cin,firstName,lastName,phone,email, password);
+			
 	}
 
-	public void setAppointmentList(ArrayList<Appointment> appointmentList) {
-		this.appointmentList = appointmentList;
+	public MedicalFile getMedicalFile() {
+		return medicalFile;
+	}
+
+	public void setMedicalFile(MedicalFile medicalFile) {
+		this.medicalFile = medicalFile;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
 }

@@ -1,3 +1,4 @@
+
 package com.DAO;
 
 import java.sql.Connection;
@@ -11,112 +12,92 @@ public class UserDAO implements UserService {
 	
 	private DbConfigDAO dbInstance;
 	private Connection connection;
-	private PreparedStatement preStat;
-	private ResultSet result;
-	private String query;
+
 	
 	public UserDAO() {
 		dbInstance=DbConfigDAO.getInstance();
+		try {
+			connection = dbInstance.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	//for login:
 	@Override
 	public User checkLogin(String email, String password) throws SQLException {
 		
-		query = "SELECT * FROM USER WHERE email = ? and password = ?";
-		this.connection=dbInstance.getConnection();
-		preStat = connection.prepareStatement(query);
+		String query = "SELECT * FROM user WHERE email = ? and password = ?";
+		PreparedStatement preStat = connection.prepareStatement(query);
 		preStat.setString(1,email);
 		preStat.setString(2,password);
-		result = preStat.executeQuery();
+		ResultSet result = preStat.executeQuery();
 		
 		User user = null;
 		
 		if(result.next()) {
-			int id=result.getInt("id");
+			int id=result.getInt("id_user");
 			String firstName = result.getString("firstName");
 			String lastName = result.getString("lastName");
 			String phone = result.getString("phone");
+			String cin = result.getString("cin");
+			String  accountType = result.getString("accountType");
 			
-			user = new User(id,firstName,lastName,phone,email,password);
+			user = new User(id,cin,firstName,lastName,phone,email,password);
+			user.setAccountType(accountType);
 		}
 		connection.close();
 		return user;
 	}
 	//for register:
-	public int register(User user) {
+	@Override
+	public boolean isExist(String email,String cin) throws SQLException {
+		boolean exist = true;
+		String query = "SELECT ID FROM USER WHERE email = ? and cin = ?";
+		PreparedStatement preStat = connection.prepareStatement(query);
+		preStat.setString(1, email);
+		preStat.setString(2, cin);
+		ResultSet resultSet = preStat .executeQuery();
+		
+		exist = resultSet.next() ? true : false ;
+		preStat .close();
+			
+		return exist ;
+	}
 
-		try {
+	@Override
+	public int register(User user) throws SQLException {
+	
 			// connect to data base
-			dbInstance=DbConfigDAO.getInstance();
-			Connection connection = dbInstance.getConnection();
+			
 
 			//prepare statements
 			String insertQuery = "INSERT INTO USER (firstName,lastName,phone,email,password) VALUES (?,?,?,?,?)";
 			String maxQuery = "SELECT MAX(id) AS MID FROM USER";
-			PreparedStatement cs = connection.prepareStatement(insertQuery);
+			PreparedStatement preStat = connection.prepareStatement(insertQuery);
 			PreparedStatement ms = connection.prepareStatement(maxQuery);
-
+			
 			//set attributes
-
-			cs.setString(1, user.getFristName());
-			cs.setString(2, user.getLastName());
-			cs.setString(3, user.getPhone());
-			cs.setString(4, user.getEmail());
-			cs.setString(5, user.getPassword());
-
+			preStat.setString(1, user.getFirstName());
+			preStat.setString(2, user.getLastName());
+			preStat.setString(3, user.getPhone());
+			preStat.setString(4, user.getEmail());
+			preStat.setString(5, user.getPassword());
+			
 			// Execute statements
-
-			cs.executeUpdate();
-
+			preStat.executeUpdate();
+			
 			//set The ID
-
+			
 			ResultSet resultSet = ms.executeQuery();
 			if (resultSet.next()) {
-				user.setId(resultSet.getInt("MID"));
+				user.setId_user(resultSet.getInt("MID"));
 			}
-
+			
 			// close statement
-			cs.close();
-
-
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return user.getId();
-	}
-
-	@Override
-	public boolean isExist(String email) {
-		boolean exist = true;
-		try {
-			// connect to data base
-			dbInstance=DbConfigDAO.getInstance();
-			Connection connection = dbInstance.getConnection();
-
-			//prepare statements
-			String fetchQuery = "SELECT ID FROM USER WHERE email = ? ";
-			PreparedStatement cs = connection.prepareStatement(fetchQuery);
-
-			//set attributes
-			cs.setString(1, email);
-
-
-			// Execute statements
-			ResultSet resultSet = cs.executeQuery();
-
-			exist = resultSet.next() ? true : false ;
-
-			// close statement
-			cs.close();
-
-
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return exist ;
+			preStat.close();
+			return 0;
 	}
 
 }

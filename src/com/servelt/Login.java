@@ -24,7 +24,7 @@ public class Login extends HttpServlet {
       
     }
 
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 	}
@@ -42,14 +42,22 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			if(user != null) {
 				HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-				
+                
+                //Vérifiez si est un médecin ou patient et dirige chacun vers sa espace
+                String  accountType = user.getAccountType() ;
+                if(accountType.equals("doctor")) {
+                	this.getServletContext().getRequestDispatcher("/WEB-INF/home_doctor.jsp").forward(request, response);
+                }
+                else if(accountType.equals("patient")) {
+                	this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+                }
+                				
 			}
 			else {
 				String message = "Email et/ou Mot de passe incorrect(s)";
                 request.setAttribute("message", message);
                 doGet(request, response);
-                //this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                
 			}
 		} catch (SQLException e) {
 			
