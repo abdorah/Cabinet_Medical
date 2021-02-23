@@ -2,23 +2,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <!--   BOX ICONS  -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-        
-        <!--   CSS  -->
-        <link rel="stylesheet" href="css/styles.css">
-        <link href="css/sb-admin-2.min.css" rel="stylesheet">
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- ===== BOX ICONS ===== -->
+     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+     
+     <!-- ===== CSS ===== -->
+     <link rel="stylesheet" href="css/styles.css">
+     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+     
+     <!-- ===== CSS font ===== -->
+     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+     <!--lien dataTable.css-->
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 
- 	    <!-- Custom styles for this page -->
-    	<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
-        <title>Liste patients</title>
+     <title>Liste patients</title>
     </head>
 
     <%@ page import = "com.javaBeans.Patient" %>
@@ -76,6 +74,7 @@
 	                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 	                        <thead>
 	                            <tr>
+	                            	<th>CIN</th>
 	                                <th>Nom</th>
 	                                <th>Prenom</th>
 	                                <th>Email</th>
@@ -92,6 +91,7 @@
 								%>
 	 
 	                            <tr>
+	                            	<td><%= patient.getCin() %></td>
 	                                <td><%= patient.getFirstName() %></td>
 	                                <td><%= patient.getLastName() %></td>
 	                                <td><%= patient.getEmail() %></td>
@@ -109,7 +109,7 @@
 						                	<input type="hidden" name="id" value="<%= patient.getId_user() %>" />	
 						                	<button class="btn btn-danger" type="submit"><i class="fas fa-user-times"></i></button>	
 						                	
-						                	<a type="button" href="#?id=<%= patient.getId_user() %>" class="btn btn-info"> 
+						                	<a type="button" href="MedicalFile?id=<%= patient.getId_user() %>" class="btn btn-info"> 
 							                    <i class="fas fa-folder"></i>
 							                </a>			                	
 						                </form>
@@ -135,23 +135,22 @@
 		
 		<!--===== MAIN JS =====-->
         <script src="js/main.js"></script>
-		
-		<!-- Bootstrap core JavaScript-->
-	    <script src="vendor/jquery/jquery.min.js"></script>
-	    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	
-	    <!-- Core plugin JavaScript-->
-	    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-	
-	    <!-- Custom scripts for all pages-->
+		<!-- Custom scripts for all pages-->
 	    <script src="js/sb-admin-2.min.js"></script>
 	
-	    <!-- Page level plugins -->
-	    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-	    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	
-	    <!-- Page level custom scripts -->
-	    <script src="js/demo/datatables-demo.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+		<!--script dataTable-->
+	    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+	    
+	    <script>
+            
+	       	$(document).ready(function() {
+	            var table = $('#dataTable').DataTable();
+	   		 } );
+    	</script>
 
     </body>
 </html>

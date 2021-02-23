@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<%@ page import = "com.javaBeans.User" %>
-  
-<%
-	User user = (User) session.getAttribute("user");
-%>
-
+    
 <header class="header" id="header">
     <div class="header__toggle">
         <i class='bx bx-menu' id="header-toggle"></i>
     </div>
    
-	<span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= user.getFirstName() %> <%= user.getLastName() %></span>
+	<span class="mr-2 d-none d-lg-inline text-gray-600 small">doctor</span>
     <div class="header__img">
         <img src="images/perfil.jpg" alt="">
     </div>

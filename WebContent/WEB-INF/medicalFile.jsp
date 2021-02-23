@@ -2,6 +2,9 @@
 <%@page import="com.DAO.AppointmentDAO"%>
 <%@page import="com.javaBeans.MedicalFile,java.util.ArrayList,com.javaBeans.Appointment,java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ page import = "com.javaBeans.User" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +24,25 @@
 	<title>Dossier médicale du patient</title>
 </head>
 <body>
+	
 	<!-- Side bar -->
-	<%@ include file="side-bar.jsp" %>
+	<%
+		User user = (User) session.getAttribute("user");
+
+		String  accountType = user.getAccountType() ;
+        if(accountType.equals("doctor")) {
+    %>
+        	<%@ include file="side-bar_doctor.jsp" %>
+    <% 
+        }
+        else {
+    %>
+        	<%@ include file="side-bar.jsp" %>
+    <% 
+        }
+    %>	
 	<!-- fin Side bar -->
+
 	<!-- debut cards -->
 	<div class="container-fluid" style="margin-top: 100px;">
 	    <h1 class="h3 mb-2 text-gray-800"><b>Dossier Médical : ${ medicalFile.id}</b></h1>
@@ -350,16 +369,21 @@
 	<!-- footer -->
 	<%@ include file="footer.jsp" %>
 	<!-- fin footer -->
-
 	
-	<script src="js/main.js"></script>
+  	<!--===== MAIN JS =====-->
+    <script src="js/main.js"></script>
+
+	<!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
 	<!--script dataTable-->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    
     <!-- script js -->
+    
 	<script>
             
        $(document).ready(function() {
@@ -376,9 +400,7 @@
                 $('#dataTable2 tfoot').css("display","none");
                 
             }
-           
-            
-            
+
    		 } );
     </script>
     <script>

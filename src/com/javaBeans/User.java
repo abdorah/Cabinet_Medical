@@ -12,7 +12,7 @@ public class User {
 	private String accountType;
 	
 	public User() {
-		
+		super();
 	}
 	
 	public User(int id_user,String cin,String firstName,String lastName,String phone,String email,String password) {
