@@ -84,7 +84,7 @@
                                 <td><%= appointment.getTypeofIllness()%></td>
                                 <td>					        
 					                
-					                <form action="/Cabinet/RendezVous" method="POST">						            
+					                <form action="/CabinetMedicale/RendezVous" method="POST">						            
 					                	<input type="hidden" name="id" value="<%= appointment.getId_appointment() %>" />
 					                	<input type="hidden" name="type" value="H" />	
 					                	<button class="btn btn-danger" type="submit"><i class="fas fa-calendar-times"></i></button>				                	
