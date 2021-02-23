@@ -45,6 +45,4 @@ public class MedicalFile {
 		this.statistiques = statistiques;
 	}
 	
-	
-
 }

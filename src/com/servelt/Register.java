@@ -2,6 +2,7 @@ package com.servelt;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.DAO.UserDAO;
 import com.javaBeans.Patient;
-import com.javaBeans.User;
+
 
 
 @WebServlet("/Register")
