@@ -59,7 +59,7 @@ public class RendezVous extends HttpServlet {
 		int id_A = Integer.parseInt(request.getParameter("id"));
 		
 		try {
-			appointmentDAO.SupprimerAppointment(id_A);
+			appointmentDAO.deleteAppointmentById(id_A);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
