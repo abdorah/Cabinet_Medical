@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.DAO.AppointmentDAO;
 import com.DAO.PatientDAO;
 import com.javaBeans.Patient;
 
@@ -39,13 +40,13 @@ public class S_Patient extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		PatientDAO patientDAO = new PatientDAO();
-		//AppointmentDAO appointmentDAO = new AppointmentDAO();
+		AppointmentDAO appointmentDAO = new AppointmentDAO();
 		
 		int id_p = Integer.parseInt(request.getParameter("id"));
 		
 		try {				
-			// Supprimer tout les rendez-vous du patient numero id_p
-			//appointmentDAO.SupprimerAppointmentPatient(id_p);
+			//Supprimer tout les rendez-vous du patient numero id_p
+			appointmentDAO.SupprimerAppointmentPatient(id_p);
 			
 			// Supprimer le patient numero id_p
 			patientDAO.SupprimerPation(id_p);

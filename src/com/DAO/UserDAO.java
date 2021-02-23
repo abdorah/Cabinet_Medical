@@ -1,3 +1,4 @@
+
 package com.DAO;
 
 import java.sql.Connection;
@@ -5,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.javaBeans.Patient;
 import com.javaBeans.User;
 
 public class UserDAO implements UserService {
@@ -53,7 +55,7 @@ public class UserDAO implements UserService {
 	@Override
 	public boolean isExist(String email,String cin) throws SQLException {
 		boolean exist = true;
-		String query = "SELECT ID FROM USER WHERE email = ? and cin = ?";
+		String query = "SELECT id_user FROM user WHERE email = ? and cin = ?";
 		PreparedStatement preStat = connection.prepareStatement(query);
 		preStat.setString(1, email);
 		preStat.setString(2, cin);
@@ -66,36 +68,50 @@ public class UserDAO implements UserService {
 	}
 
 	@Override
-	public int register(User user) throws SQLException {
-	
-			// connect to data base
-			
+	public int register(Patient patient) throws SQLException {
 
-			//prepare statements
-			String insertQuery = "INSERT INTO USER (firstName,lastName,phone,email,password) VALUES (?,?,?,?,?)";
-			String maxQuery = "SELECT MAX(id) AS MID FROM USER";
-			PreparedStatement preStat = connection.prepareStatement(insertQuery);
-			PreparedStatement ms = connection.prepareStatement(maxQuery);
+			/*/
+			 * insert the patient in the table user:
+			 */
+			String userQuery = "INSERT INTO user (firstName,lastName,phone,email,password,cin) VALUES (?,?,?,?,?,?)";
+			
+			PreparedStatement preStatOfUser = connection.prepareStatement(userQuery);
+			
 			
 			//set attributes
-			preStat.setString(1, user.getFirstName());
-			preStat.setString(2, user.getLastName());
-			preStat.setString(3, user.getPhone());
-			preStat.setString(4, user.getEmail());
-			preStat.setString(5, user.getPassword());
+			preStatOfUser.setString(1, patient.getFirstName());
+			preStatOfUser.setString(2, patient.getLastName());
+			preStatOfUser.setString(3, patient.getPhone());
+			preStatOfUser.setString(4, patient.getEmail());
+			preStatOfUser.setString(5, patient.getPassword());
+			preStatOfUser.setString(6, patient.getCin());
 			
-			// Execute statements
-			preStat.executeUpdate();
+			preStatOfUser.executeUpdate();
 			
-			//set The ID
-			
+			String maxQuery = "SELECT MAX(id_user) AS MID FROM user";
+			PreparedStatement ms = connection.prepareStatement(maxQuery);
 			ResultSet resultSet = ms.executeQuery();
 			if (resultSet.next()) {
-				user.setId_user(resultSet.getInt("MID"));
+				patient.setId_user(resultSet.getInt("MID"));
 			}
 			
+			/*/
+			 * insert the patient in the table patient:
+			 */
+			String patientQuery = "INSERT INTO patient (id_patient,BirthDate,sex) VALUES (?,?,?)";
+			
+			PreparedStatement preStatOfpatient = connection.prepareStatement(patientQuery);
+			
+			preStatOfpatient.setInt(1, patient.getId_user());
+			preStatOfpatient.setString(2, patient.getBirthDate());
+			preStatOfpatient.setString(3, patient.getSex());
+			
+			// Execute statements
+			preStatOfpatient.executeUpdate();
+			
 			// close statement
-			preStat.close();
+			preStatOfpatient.close();
+			preStatOfUser.close();
 			return 0;
 	}
 

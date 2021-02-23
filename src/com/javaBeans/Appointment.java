@@ -1,4 +1,3 @@
-
 package com.javaBeans;
 
 public class Appointment {

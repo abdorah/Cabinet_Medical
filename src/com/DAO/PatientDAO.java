@@ -12,10 +12,6 @@ public class PatientDAO implements PatientService{
 	private DbConfigDAO dbInstance;
 	private Connection connection;
 	
-	PreparedStatement preStat;
-	ResultSet result;
-	String query;
-	
 	public PatientDAO() {
 		dbInstance=DbConfigDAO.getInstance();
 		try {
@@ -55,6 +51,10 @@ public class PatientDAO implements PatientService{
 	
 	public ArrayList<Patient> ListePatients() throws SQLException {
 		
+		PreparedStatement preStat;
+		ResultSet result;
+		String query;
+		
 		ArrayList<Patient> patients = new ArrayList<Patient>();
 		
 		query="SELECT * FROM user ,patient  WHERE id_user = id_patient ";
@@ -83,6 +83,10 @@ public class PatientDAO implements PatientService{
 	}
 	
 	public Patient AfficherPation(int id_p) throws SQLException {
+		
+		PreparedStatement preStat;
+		ResultSet result;
+		String query;
 
 		connection=dbInstance.getConnection();
 
@@ -111,6 +115,9 @@ public class PatientDAO implements PatientService{
 	
 	public int ModifierPation(int id_user, String firstName, String lastName, String phone, String email, String birthDate, String sex) throws SQLException {
 
+		PreparedStatement preStat;
+		String query;
+		
 		connection=dbInstance.getConnection();
 		
 		query="UPDATE patient SET BirthDate = ?, sex = ? WHERE id_patient = ?  ";
@@ -137,6 +144,9 @@ public class PatientDAO implements PatientService{
 	}
 	
 	public int SupprimerPation(int id_patient) throws SQLException {
+		
+		PreparedStatement preStat;
+		String query;
 
 		connection=dbInstance.getConnection();
 		

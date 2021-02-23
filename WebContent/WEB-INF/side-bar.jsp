@@ -35,20 +35,12 @@
                     <span class="nav__name">Rendez-vous</span>
                 </a>
 
-                <a href="#" class="nav__link">
+                <!-- <a href="#" class="nav__link">
                     <i class='bx bx-folder nav__icon' ></i>
                     <span class="nav__name">Dossiers médicaux</span>
-                </a>
+                </a> -->
 
-                <a href="#" class="nav__link">
-                    <i class='bx bx-bookmark nav__icon' ></i>
-                    <span class="nav__name">Favorites</span>
-                </a>
-
-                <a href="#" class="nav__link">
-                    <i class='bx bx-bar-chart-alt-2 nav__icon' ></i>
-                    <span class="nav__name">Analytics</span>
-                </a>
+                
             </div>
         </div>
 
