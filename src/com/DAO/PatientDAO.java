@@ -94,6 +94,7 @@ public class PatientDAO implements PatientService{
 		result.next();
 				
 		int id= result.getInt("id_user");
+		String cin=result.getString("cin");
 		String firstName=result.getString("firstName");
 		String lastName=result.getString("lastName");
 		String phone=result.getString("phone");
@@ -103,7 +104,7 @@ public class PatientDAO implements PatientService{
 		String birthDate= result.getString("birthDate");
 		String sex=result.getString("sex");
 		
-		Patient patient = new Patient(id, firstName, lastName, phone, email, password, birthDate, sex);
+		Patient patient = new Patient(id, cin, firstName, lastName, phone, email, password, birthDate, sex);
 			
 		return patient;
 	}
@@ -144,7 +145,7 @@ public class PatientDAO implements PatientService{
 		preStat.setLong(1,id_patient);
 		int s1 = preStat.executeUpdate();
 		
-		query="DELETE FROM user WHERE id = ?  ";
+		query="DELETE FROM user WHERE id_user = ?  ";
 		preStat=connection.prepareStatement(query);
 		preStat.setLong(1,id_patient);
 		int s2 = preStat.executeUpdate();

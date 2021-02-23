@@ -14,9 +14,8 @@
         <!--   CSS  -->
         <link rel="stylesheet" href="css/styles.css">
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
-        
 
- 	   <!-- Custom styles for this page -->
+ 	    <!-- Custom styles for this page -->
     	<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     
         <title>Liste patients</title>
@@ -25,8 +24,13 @@
     <%@ page import = "com.javaBeans.Patient" %>
 	<%@ page import = "java.util.ArrayList" %>
 	<%@ page import = "java.util.Date" %>
+	
+	<body id="body-pd">
+	
 	<%@ include file="side-bar_doctor.jsp" %>
 	
+	<!-- Begin Page Content -->
+		<div class="container-fluid" style="padding-top:5rem;">
 	<%
 		ArrayList<Patient> patients = (ArrayList<Patient>) request.getAttribute("patients");
 
@@ -56,12 +60,7 @@
 			}
 		}
 	%>
-    
-    <body id="body-pd">
-    	
-		 <!-- Begin Page Content -->
-	
-		<div class="container-fluid" style="padding-top:5rem;">
+			
             <!-- Page Heading -->
             <p class="mb-4">
             	Voici Tout les patients  
@@ -101,9 +100,9 @@
 	                                <td><%= patient.getSex() %></td>
 	                                <td>
 						                
-						                <form action="/Cabinet/Patients" method="POST">
+						                <form action="/CabinetMedicale/Patients" method="POST">
 						                
-							                <a type="button" href="/Cabinet/EditPatient?id=<%= patient.getId_user() %>" class="btn btn-success"> 
+							                <a type="button" href="/CabinetMedicale/EditPatient?id=<%= patient.getId_user() %>" class="btn btn-success"> 
 							                    <i class="fas fa-user-edit"></i>
 							                </a>					                
 						                
@@ -129,13 +128,15 @@
 	
 	    </div>
 	    <!-- End of Main Content -->
-	
 			
         <!-- footer -->
 		<%@ include file="footer.jsp" %>
 		<!-- fin footer -->
 		
-		    <!-- Bootstrap core JavaScript-->
+		<!--===== MAIN JS =====-->
+        <script src="js/main.js"></script>
+		
+		<!-- Bootstrap core JavaScript-->
 	    <script src="vendor/jquery/jquery.min.js"></script>
 	    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	
@@ -152,8 +153,5 @@
 	    <!-- Page level custom scripts -->
 	    <script src="js/demo/datatables-demo.js"></script>
 
-        <!--===== MAIN JS =====-->
-        <script src="js/main.js"></script>
-        <!-- script -->
     </body>
 </html>

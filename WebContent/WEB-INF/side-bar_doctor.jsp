@@ -28,7 +28,7 @@
             </a>
 
             <div class="nav__list">
-                <a href="/CabinetMedicale/Doctor" class="nav__link active">
+                <a href="/CabinetMedicale/Login" class="nav__link active">
                 <i class='bx bx-grid-alt nav__icon' ></i>
                     <span class="nav__name">Dashboard</span>
                 </a>
