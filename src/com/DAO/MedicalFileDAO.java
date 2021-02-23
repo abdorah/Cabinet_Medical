@@ -56,37 +56,38 @@ public class MedicalFileDAO implements MedicaleFileService {
 		int nbapp = result1.getInt("COUNT(*)");
 		
 		statistiques.put("appointments", (double) nbapp);
+		preStat1.close();
 		
 		String query2 = "SELECT COUNT(*) FROM consultation WHERE id_patient = ?";
-		PreparedStatement preStat2 = connection.prepareStatement(query2);
-		preStat2.setInt(1, id_patient);
-		ResultSet result2 = preStat1.executeQuery();
-		result2.next();
-		int nbcons = result2.getInt("COUNT(*)");
+		preStat1 = connection.prepareStatement(query2);
+		preStat1.setInt(1, id_patient);
+		result1 = preStat1.executeQuery();
+		result1.next();
+		int nbcons = result1.getInt(1);
 		
 		statistiques.put("consultations", (double) nbcons);
+		preStat1.close();
 		
 		String query3 = "SELECT COUNT(*) FROM consultation WHERE id_patient = ? and id_prescription is NOT NULL";
 		PreparedStatement preStat3 = connection.prepareStatement(query3);
 		preStat3.setInt(1, id_patient);
 		ResultSet result3 = preStat1.executeQuery();
 		result3.next();
-		int nbpresc = result3.getInt("COUNT(*)");
+		int nbpresc = result3.getInt(1);
 		
-		System.out.print(nbpresc);
+		
 		
 		statistiques.put("prescriptions", (double) nbpresc);
 		
-		String query4 = "SELECT price FROM consultation WHERE id_patient = ?";
+		String query4 = "SELECT SUM(price) FROM consultation WHERE id_patient = ?";
 		PreparedStatement preStat4 = connection.prepareStatement(query4);
 		preStat4.setInt(1, id_patient);
 		ResultSet result4 = preStat1.executeQuery();
 		result4.next();
 		double totalPrice = result4.getDouble(1);
 		
-		System.out.print(totalPrice);
-		
 		statistiques.put("price", totalPrice);
+		System.out.print(statistiques);
 		return statistiques;
 	}
 

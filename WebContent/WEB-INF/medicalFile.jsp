@@ -14,7 +14,7 @@
      <!-- ===== CSS font ===== -->
      <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
      <!--lien dataTable.css-->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
      <!-- Custom styles for this template-->
      <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -108,7 +108,7 @@
 	                            
 	                            <tr>
 	                                <td>Total des frais payés :</td>
-	                                <td><%=statistiques.get("totalPrice") %></td>
+	                                <td><%=statistiques.get("price") %></td>
 	                            </tr>
 	                        </tbody>
                          </table>
@@ -247,42 +247,56 @@
 			                        <td><%=cons.getMotif() %></td>
 			                        <td><%=cons.getPrice() %></td>
 			                        <td>
-			                        	<input type="hidden" name="id" value="" />
-			                        	<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#ModalShow">
-					                		<i class="fas fa-edit"></i>
-					                	</button>
-					                	<div class="modal" id="ModalShow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <table class="table table-bordered table-striped" style="color: black;font-weight: bold;">
-									                        <tbody>
-									                        	
-									                            <tr>
-									                                <td>Titre d'ordonnance : </td>
-									                                <td><%=cons.getPrescription().getTitle()%></td>
-									                            </tr>
-									                            <tr>
-									                                <td>Description :</td>
-									                                <td><%=cons.getPrescription().getDescription() %></td>
-									                            </tr>
-									                            <tr>
-									                                <td>Liste des médicaments :</td>
-									                                <td><%=cons.getPrescription().getMedicationList() %></td>
-									                            </tr>
-									                            
-									                           
-									                        </tbody>
-								                         </table>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Fermer</button>
-                                                       
-                                                	</div>
-                                                </div>
-                                            </div>
-                                        </div>  	
+			                        	<!-- <input type="hidden" name="id" value="" /> -->
+			                        	<% 
+			                        		if(cons.getPrescription() == null){
+			                        	%>
+			                        	    Vide
+			                        	<% 
+			                        	
+			                        		}else{
+			                        	%>
+			                        	
+			                        	
+				                        	<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#ModalShow">
+						                		<i class="fas fa-edit"></i>
+						                	</button>
+						                	<div class="modal" id="ModalShow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	                                            <div class="modal-dialog" role="document">
+	                                                <div class="modal-content">
+	                                                    <div class="modal-body">
+	                                                        <table class="table table-bordered table-striped" style="color: black;font-weight: bold;">
+										                        <tbody>
+										                        	
+										                            <tr>
+										                                <td>Titre d'ordonnance : </td>
+										                                <td><%=cons.getPrescription().getTitle()%></td>
+										                            </tr>
+										                            <tr>
+										                                <td>Description :</td>
+										                                <td><%=cons.getPrescription().getDescription() %></td>
+										                            </tr>
+										                            <tr>
+										                                <td>Liste des médicaments :</td>
+										                                <td><%=cons.getPrescription().getMedicationList() %></td>
+										                            </tr>
+										                            
+										                           
+										                        </tbody>
+									                         </table>
+	                                                    </div>
+	                                                    <div class="modal-footer">
+	                                                        <button type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Fermer</button>
+	                                                       
+	                                                	</div>
+	                                                </div>
+	                                            </div>
+	                                        </div>  	
 			                        </td>
+			                        	<%	
+			                        		} 
+			                        	
+			                        	%>
 			                        <td>
 			                        	
 			                        	<form action="/CabinetMedicale/MedicalFile?id=<%=id_patient %>" method="POST">
@@ -307,7 +321,7 @@
 					                	</form>
 			                        </td>
 			                    </tr>
-			                 <%
+			                <%
 			                	id1++;
 			                	}
 			                %>

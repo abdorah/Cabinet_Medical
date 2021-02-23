@@ -72,5 +72,16 @@ public class PrescriptionDAO implements PrescriptionService{
 		}
 		
 	}
+	@Override
+	public boolean deletePrescriptionById(int id_prescription) throws SQLException {
+		String query = "DELETE FROM prescription WHERE id_prescription= ?";
+		connection = dbInstance.getConnection();
+		PreparedStatement preStat = connection.prepareStatement(query);
+		preStat.setInt(1, id_prescription);
+		int state = preStat.executeUpdate();
+		
+		boolean isDelete = state == 0 ? false : true;
+		return isDelete;
+	}
 
 }
