@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.DAO.AppointmentDAO;
 import com.DAO.PatientDAO;
 import com.javaBeans.Patient;
 

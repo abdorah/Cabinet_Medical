@@ -41,16 +41,10 @@ public class Appointments extends HttpServlet {
         String description = request.getParameter("description");
         String typeofIllness = request.getParameter("treatment");
 
-        Patient patient = new Patient();
-        try {
-            patient = patientDao.getPatientById(1);// getPatientById(((User)request.getSession().getAttribute("email")).getId());
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-        } 
-
-        System.out.println(date);
+        //Patient patient = new Patient();
 
         try {
+            Patient patient = patientDao.getPatientById(1);// getPatientById(((User)request.getSession().getAttribute("email")).getId());
             Appointment appointment = new Appointment(date, description, typeofIllness, false, patient);
             if(appointmentDao.takeAppointment(appointment)!=0) {
                 appointment.setId_appointment(appointmentDao.takeAppointment(appointment));
