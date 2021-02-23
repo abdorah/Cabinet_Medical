@@ -1,14 +1,19 @@
+
 package com.servelt;
 
 import java.io.IOException;
-
-
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.DAO.AppointmentDAO;
+import com.DAO.PatientDAO;
+import com.javaBeans.Appointment;
+import com.javaBeans.Patient;
 
 
 
@@ -29,35 +34,33 @@ public class Appointments extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       /* AppointmentDAO appointmentDao = new AppointmentDAO();
-        Appointment appointment = null;
+    	 AppointmentDAO appointmentDao = new AppointmentDAO();
+         PatientDAO patientDao = new PatientDAO();
 
-        String timeofAppointment;
-        String dateofAppointment;
-        timeofAppointment = request.getParameter("time");
-        dateofAppointment = request.getParameter("date");
-        Date date = null;
-        try {
-            date = (Date) new SimpleDateFormat("MM/dd/yyyy HH:mm").parse(dateofAppointment+" "+timeofAppointment);
-        } catch (ParseException e2) {
-            e2.printStackTrace();
-        }
+         String datetime = request.getParameter("datetime");
+         String[] strDate = datetime.split("T");
+         String date = strDate[0]+' '+strDate[1]+":00";
 
-        String reason = request.getParameter("description");
-        String typeofIllness = request.getParameter("state");
-        int patient = ((User)request.getSession().getAttribute("currentUser")).getId();
-        boolean notification = false;
+         String description = request.getParameter("description");
+         String typeofIllness = request.getParameter("treatment");
 
-        appointment.setDateofAppointment(date);
-        appointment.setReason(reason);
-        appointment.setTypeofIllness(typeofIllness);
-        appointment.setPatient(patient);
-        appointment.setNotification(notification);
-        try {
-            appointmentDao.takeAppointment(appointment);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/New-Appointment.jsp").forward(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
+         Patient patient = new Patient();
+         try {
+             patient = patientDao.getPatientById(1);// getPatientById(((User)request.getSession().getAttribute("email")).getId());
+         } catch (SQLException e1) {
+             e1.printStackTrace();
+         } 
+
+         System.out.println(date);
+
+         try {
+             Appointment appointment = new Appointment(date, description, typeofIllness, false, patient);
+             if(appointmentDao.takeAppointment(appointment)!=0) {
+                 appointment.setId_appointment(appointmentDao.takeAppointment(appointment));
+             }
+             doGet(request,response);
+         } catch (SQLException e2) {
+             e2.printStackTrace();
+         }
     }
 }
