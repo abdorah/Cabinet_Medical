@@ -74,6 +74,7 @@
 	                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 	                        <thead>
 	                            <tr>
+	                            	<th>CIN</th>
 	                                <th>Nom</th>
 	                                <th>Prenom</th>
 	                                <th>Email</th>
@@ -90,6 +91,7 @@
 								%>
 	 
 	                            <tr>
+	                            	<td><%= patient.getCin() %></td>
 	                                <td><%= patient.getFirstName() %></td>
 	                                <td><%= patient.getLastName() %></td>
 	                                <td><%= patient.getEmail() %></td>
