@@ -16,17 +16,14 @@ import com.google.gson.Gson;
 import com.javaBeans.HomeData;
 import com.javaBeans.User;
 
-
 @WebServlet("/DataServlet")
 public class DataServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
 
     public DataServlet() {
         super();
 
     }
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Gson gson = new Gson();
@@ -41,10 +38,8 @@ public class DataServlet extends HttpServlet {
         response.getWriter().write(jsonString);
     }
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         doGet(request, response);
     }
-
 }

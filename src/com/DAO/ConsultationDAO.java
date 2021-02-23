@@ -88,12 +88,8 @@ public class ConsultationDAO implements ConsultationService {
 			preStat.setString(2, consultation.getConsulationDate());
 			preStat.setDouble(3, consultation.getPrice());
 			preStat.setInt(4, consultation.getPatient().getId_user());
-			
-			
 		}
-		
-		
-		
+
 		int result = preStat.executeUpdate();
 		
 		boolean isInsert = result == 0 ? false : true;

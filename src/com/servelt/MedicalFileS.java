@@ -17,7 +17,6 @@ import com.DAO.MedicalFileDAO;
 import com.DAO.PrescriptionDAO;
 import com.javaBeans.MedicalFile;
 
-
 @WebServlet("/MedicalFile")
 public class MedicalFileS extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,9 +42,7 @@ public class MedicalFileS extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -78,11 +75,7 @@ public class MedicalFileS extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}
-		
-		
-		
-		
+		}	
 	}
 
 }

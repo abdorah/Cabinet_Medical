@@ -25,9 +25,9 @@
                     <span class="nav__name">Tableau de bord</span>
                 </a>
 
-                <a href="/CabinetMedicale/#" class="nav__link">
+                <a href="/CabinetMedicale/Info_patient" class="nav__link">
                     <i class='bx bx-user nav__icon' ></i>
-                    <span class="nav__name">Patients</span>
+                    <span class="nav__name">Info</span>
                 </a>
                 
                 <a href="/CabinetMedicale/Appointments" class="nav__link">
