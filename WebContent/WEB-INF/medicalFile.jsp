@@ -2,6 +2,9 @@
 <%@page import="com.DAO.AppointmentDAO"%>
 <%@page import="com.javaBeans.MedicalFile,java.util.ArrayList,com.javaBeans.Appointment,java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ page import = "com.javaBeans.User" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,16 +17,32 @@
      <!-- ===== CSS font ===== -->
      <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
      <!--lien dataTable.css-->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
      <!-- Custom styles for this template-->
      <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 	<title>Dossier médicale du patient</title>
 </head>
 <body>
+	
 	<!-- Side bar -->
-	<%@ include file="side-bar.jsp" %>
+	<%
+		User user = (User) session.getAttribute("user");
+
+		String  accountType = user.getAccountType() ;
+        if(accountType.equals("doctor")) {
+    %>
+        	<%@ include file="side-bar_doctor.jsp" %>
+    <% 
+        }
+        else {
+    %>
+        	<%@ include file="side-bar.jsp" %>
+    <% 
+        }
+    %>	
 	<!-- fin Side bar -->
+
 	<!-- debut cards -->
 	<div class="container-fluid" style="margin-top: 100px;">
 	    <h1 class="h3 mb-2 text-gray-800"><b>Dossier Médical : ${ medicalFile.id}</b></h1>
@@ -108,7 +127,7 @@
 	                            
 	                            <tr>
 	                                <td>Total des frais payés :</td>
-	                                <td><%=statistiques.get("totalPrice") %></td>
+	                                <td><%=statistiques.get("price") %></td>
 	                            </tr>
 	                        </tbody>
                          </table>
@@ -121,8 +140,11 @@
 			    <div class="card-header py-3">
 			        <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-list-alt" aria-hidden="true"></i> &nbsp;Listes des rendez-vous</h6>
 			    </div>
-			     <div class="my-2"></div>
-			        
+			    <div class="my-2"></div>
+			    
+			    <% int id_patient= Integer.parseInt(request.getParameter("id")); %> 
+			    
+			    
 			    <div class="card-body">
 			        <div class="table-responsive">
 			            <table  class="table table-bordered" style="color: black;" id="dataTable1" width="100%" cellspacing="0">
@@ -152,9 +174,10 @@
 			                        <td><%=app.getTypeofIllness() %></td>
 			                        <td><%=app.getDescription() %></td>
 			                        <td>
-			                        	<form action="/CabinetMedicale/MedicalFile" method="POST">
+			                        
+			                        	<form action="/CabinetMedicale/MedicalFile?id=<%=id_patient %>" method="POST">
 					                
-							                <input type="hidden" name="id" value="<%=app.getId_appointment() %>" />
+							                <input type="hidden" name="id_appointment" value="<%=app.getId_appointment() %>" />
 						                	<button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#ModalDelete">
 						                		<i class="far fa-trash-alt"></i>
 						                	</button>
@@ -207,7 +230,7 @@
 	                <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-list-alt" aria-hidden="true"></i> &nbsp;Listes des consultations</h6>
 	            </div>
 	            <div class="my-2"></div>
-	                <a href="#" class="btn btn-success btn-icon-split" data-toggle="modal" data-target="exampleModal" style="margin-left: 15px;width: 23%;">
+	                <a href="/CabinetMedicale/AddConsultation?id=<%=id_patient %>" class="btn btn-success btn-icon-split" style="margin-left: 15px;width: 23%;">
 	                    <span class="icon text-white-50">
 	                        <i class="fa fa-plus" aria-hidden="true"></i>
 	                    </span>
@@ -224,6 +247,7 @@
 	                                <th>Motif de consultation</th>
 	                                <th>Prix en DHS</th>
 	                                <th>Ordonnance</th>
+	                                <th>Actions</th>
 	                                
 	                            </tr>
 	                        </thead>
@@ -241,9 +265,82 @@
 			                        <td><%=cons.getConsulationDate() %></td>
 			                        <td><%=cons.getMotif() %></td>
 			                        <td><%=cons.getPrice() %></td>
-			                        <td><%=cons.getPrescription() %></td>
+			                        <td>
+			                        	<!-- <input type="hidden" name="id" value="" /> -->
+			                        	<% 
+			                        		if(cons.getPrescription() == null){
+			                        	%>
+			                        	    Vide
+			                        	<% 
+			                        	
+			                        		}else{
+			                        	%>
+			                        	
+			                        	
+				                        	<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#ModalShow">
+						                		<i class="fas fa-edit"></i>
+						                	</button>
+						                	<div class="modal" id="ModalShow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	                                            <div class="modal-dialog" role="document">
+	                                                <div class="modal-content">
+	                                                    <div class="modal-body">
+	                                                        <table class="table table-bordered table-striped" style="color: black;font-weight: bold;">
+										                        <tbody>
+										                        	
+										                            <tr>
+										                                <td>Titre d'ordonnance : </td>
+										                                <td><%=cons.getPrescription().getTitle()%></td>
+										                            </tr>
+										                            <tr>
+										                                <td>Description :</td>
+										                                <td><%=cons.getPrescription().getDescription() %></td>
+										                            </tr>
+										                            <tr>
+										                                <td>Liste des médicaments :</td>
+										                                <td><%=cons.getPrescription().getMedicationList() %></td>
+										                            </tr>
+										                            
+										                           
+										                        </tbody>
+									                         </table>
+	                                                    </div>
+	                                                    <div class="modal-footer">
+	                                                        <button type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Fermer</button>
+	                                                       
+	                                                	</div>
+	                                                </div>
+	                                            </div>
+	                                        </div>  	
+			                        </td>
+			                        	<%	
+			                        		} 
+			                        	
+			                        	%>
+			                        <td>
+			                        	
+			                        	<form action="/CabinetMedicale/MedicalFile?id=<%=id_patient %>" method="POST">
+					                		
+							                <input type="hidden" name="id_consultation" value="<%=cons.getId_consultation() %>" />
+						                	<button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#ModalDelete1">
+						                		<i class="far fa-trash-alt"></i>
+						                	</button>
+						                	<div class="modal" id="ModalDelete1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <p>Confirmez la suppression de cette consultation</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Annuler</button>
+                                                            <button type="submit" class="btn btn-outline-primary waves-effect" name="delete1" id="delete1">Confirmer</button>
+                                                    	</div>
+                                                    </div>
+                                                </div>
+                                            </div>  	
+					                	</form>
+			                        </td>
 			                    </tr>
-			                 <%
+			                <%
 			                	id1++;
 			                	}
 			                %>
@@ -272,16 +369,21 @@
 	<!-- footer -->
 	<%@ include file="footer.jsp" %>
 	<!-- fin footer -->
-
 	
-	<script src="js/main.js"></script>
+  	<!--===== MAIN JS =====-->
+    <script src="js/main.js"></script>
+
+	<!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
 	<!--script dataTable-->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    
     <!-- script js -->
+    
 	<script>
             
        $(document).ready(function() {
@@ -298,11 +400,14 @@
                 $('#dataTable2 tfoot').css("display","none");
                 
             }
-           
-            
-            
+
    		 } );
     </script>
+    <script>
+	    if ( window.history.replaceState ) {
+	        window.history.replaceState( null, null, window.location.href );
+	    }
+	</script>
 	<!-- fin script js -->
 </body>
 </html>

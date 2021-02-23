@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.DAO.UserDAO;
+import com.javaBeans.Patient;
 import com.javaBeans.User;
 
 
@@ -30,41 +31,56 @@ public class Register extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String cin=request.getParameter("cin");
-		String firstName=request.getParameter("firstName");
-		String lastName=request.getParameter("lastName");
-		String phone=request.getParameter("phone");
-		String email=request.getParameter("email");
-		String password=request.getParameter("password");
+		String cin = request.getParameter("cin");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String confPassword = request.getParameter("confPassword");
+		String sex = request.getParameter("sex");
+		String birthDate = request.getParameter("birthdate");
 		
-		User user =new User();
-		
-		user.setEmail(email);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setPhone(phone);
-		user.setCin(cin);
-		user.setPassword(password);
-		
-		UserDAO userDAO = new UserDAO();
-	
-		try {
-			boolean isExist = userDAO.isExist(email,cin);	
-			if(isExist) {
-				String message = "cet email est d�j� utilis�.Essayer un autre";
-                request.setAttribute("message", message);
-                this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-				
-			}
-			else {
-				userDAO.register(user);
-                this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-
-			}
-		} catch (Exception e) {
+		if(password.equals(confPassword)) {
 			
-			e.printStackTrace();
+			Patient patient = new Patient();
+			
+			patient.setEmail(email);
+			patient.setFirstName(firstName);
+			patient.setLastName(lastName);
+			patient.setPhone(phone);
+			patient.setCin(cin);
+			patient.setPassword(password);
+			patient.setSex(sex);
+			patient.setBirthDate(birthDate);
+			
+			UserDAO userDAO = new UserDAO();
+		
+			try {
+				boolean isExist = userDAO.isExist(email,cin);	
+				if(isExist) {
+					String message = "cet email est d�j� utilis�.Essayer un autre";
+	                request.setAttribute("message", message);
+	                this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+					
+				}
+				else {
+					userDAO.register(patient);
+	                this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+
+				}
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+		}else {
+			String message = "Mot de passe non confirm�!";
+			request.setAttribute("message", message);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 		}
+		
+		
 	}
 
 }

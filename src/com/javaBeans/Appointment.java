@@ -1,4 +1,3 @@
-
 package com.javaBeans;
 
 public class Appointment {
@@ -12,6 +11,16 @@ public class Appointment {
 
 	public Appointment(String dateofAppointment, String description, String typeofIllness, boolean notification,
 			Patient patient) {
+		this.dateofAppointment = dateofAppointment;
+		this.description = description;
+		this.typeofIllness = typeofIllness;
+		this.notification = notification;
+		this.patient = patient;
+	}
+	public Appointment(int id_appointment,String dateofChecking, String dateofAppointment, String description, String typeofIllness, boolean notification,
+			Patient patient) {
+		this.id_appointment = id_appointment;
+		this.dateofChecking = dateofChecking ;
 		this.dateofAppointment = dateofAppointment;
 		this.description = description;
 		this.typeofIllness = typeofIllness;
