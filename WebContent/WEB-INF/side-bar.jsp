@@ -20,31 +20,25 @@
             </a>
 
             <div class="nav__list">
-                <a href="#" class="nav__link active">
+                <a href="/CabinetMedicale/Login" class="nav__link active">
                 <i class='bx bx-grid-alt nav__icon' ></i>
                     <span class="nav__name">Tableau de bord</span>
                 </a>
 
-                <a href="/ProjetJEE/Patients" class="nav__link">
+                <a href="/CabinetMedicale/#" class="nav__link">
                     <i class='bx bx-user nav__icon' ></i>
                     <span class="nav__name">Patients</span>
                 </a>
                 
-                <a href="#" class="nav__link">
+                <a href="/CabinetMedicale/Appointments" class="nav__link">
                     <i class='bx bx-message-square-detail nav__icon' ></i>
                     <span class="nav__name">Rendez-vous</span>
                 </a>
-
-                <!-- <a href="#" class="nav__link">
-                    <i class='bx bx-folder nav__icon' ></i>
-                    <span class="nav__name">Dossiers médicaux</span>
-                </a> -->
-
-                
+            
             </div>
         </div>
 
-        <a href="#" class="nav__link">
+        <a href="/CabinetMedicale/Logout" class="nav__link">
             <i class='bx bx-log-out nav__icon' ></i>
             <span class="nav__name">Se déconnecter</span>
         </a>

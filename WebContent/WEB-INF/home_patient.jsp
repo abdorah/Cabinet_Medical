@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ page import = "com.javaBeans.User" %>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -10,17 +11,19 @@
         <link rel="stylesheet" href="css/styles.css">
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
-        <title>Doctor</title>
+        <title>Patient</title>
     </head>
+    
+    <%
+		User user = (User) session.getAttribute("user");
+	%>
+	
     <body id="body-pd">
-    	<%@ include file="side-bar_doctor.jsp" %>
+    	<%@ include file="side-bar.jsp" %>
     	
     	<div class="container-fluid" style="padding-top:5rem;">
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800"><b>Bonjour Doctor</b></h1>
-            <p class="mb-4">
-            	Voici un menu pour manipuler vous patients
-            </p>
+            <h1 class="h3 mb-2 text-gray-800"><b>Bonjour <%= user.getFirstName() + " " + user.getLastName() %></b></h1>
 		</div>
 			
         <!-- footer -->

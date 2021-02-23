@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import com.javaBeans.Appointment;
-import java.sql.Statement;
 import com.javaBeans.Patient;
 
 public class AppointmentDAO implements AppointmentService {

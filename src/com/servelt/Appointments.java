@@ -1,4 +1,3 @@
-
 package com.servelt;
 
 import java.io.IOException;
@@ -9,13 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.DAO.AppointmentDAO;
 import com.DAO.PatientDAO;
 import com.javaBeans.Appointment;
 import com.javaBeans.Patient;
-
-
+import com.javaBeans.User;
 
 @WebServlet("/Appointments")
 public class Appointments extends HttpServlet {
@@ -29,38 +28,34 @@ public class Appointments extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.getServletContext().getRequestDispatcher("/WEB-INF/New-Appointment.jsp").forward(request, response);
-        doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	 AppointmentDAO appointmentDao = new AppointmentDAO();
-         PatientDAO patientDao = new PatientDAO();
+        
+        AppointmentDAO appointmentDao = new AppointmentDAO();
+        PatientDAO patientDao = new PatientDAO();
 
-         String datetime = request.getParameter("datetime");
-         String[] strDate = datetime.split("T");
-         String date = strDate[0]+' '+strDate[1]+":00";
+        String datetime = request.getParameter("datetime");
+        String[] strDate = datetime.split("T");
+        String date = strDate[0]+' '+strDate[1]+":00";
 
-         String description = request.getParameter("description");
-         String typeofIllness = request.getParameter("treatment");
+        String description = request.getParameter("description");
+        String typeofIllness = request.getParameter("treatment");
 
-         Patient patient = new Patient();
-         try {
-             patient = patientDao.getPatientById(1);// getPatientById(((User)request.getSession().getAttribute("email")).getId());
-         } catch (SQLException e1) {
-             e1.printStackTrace();
-         } 
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
-         System.out.println(date);
-
-         try {
-             Appointment appointment = new Appointment(date, description, typeofIllness, false, patient);
-             if(appointmentDao.takeAppointment(appointment)!=0) {
-                 appointment.setId_appointment(appointmentDao.takeAppointment(appointment));
-             }
-             doGet(request,response);
-         } catch (SQLException e2) {
-             e2.printStackTrace();
-         }
+        try {
+            Patient patient = patientDao.getPatientById(user.getId_user());
+            Appointment appointment = new Appointment(date, description, typeofIllness, false, patient);
+            if(appointmentDao.takeAppointment(appointment)!=0) {
+                appointment.setId_appointment(appointmentDao.takeAppointment(appointment));
+            }
+            
+            this.getServletContext().getRequestDispatcher("/WEB-INF/home_patient.jsp").forward(request, response);
+        } catch (SQLException e2) {
+            e2.printStackTrace();
+        }
     }
 }

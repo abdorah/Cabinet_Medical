@@ -1,12 +1,10 @@
 package com.DAO;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-
 
 import com.javaBeans.MedicalFile;
 
@@ -20,7 +18,6 @@ public class MedicalFileDAO implements MedicaleFileService {
 		try {
 			connection = dbInstance.getConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

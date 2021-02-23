@@ -22,7 +22,7 @@
             </a>
 
             <div class="nav__list">
-                <a href="/CabinetMedicale/Login" class="nav__link active">
+                <a href="/CabinetMedicale/Home" class="nav__link active">
                 <i class='bx bx-grid-alt nav__icon' ></i>
                     <span class="nav__name">Dashboard</span>
                 </a>
@@ -42,19 +42,10 @@
                     <span class="nav__name">Historique</span>
                 </a>
 
-                <a href="#" class="nav__link">
-                    <i class='bx bx-bookmark nav__icon' ></i>
-                    <span class="nav__name">Favorites</span>
-                </a>
-
-                <a href="#" class="nav__link">
-                    <i class='bx bx-bar-chart-alt-2 nav__icon' ></i>
-                    <span class="nav__name">Analytics</span>
-                </a>
             </div>
         </div>
 
-        <a href="#" class="nav__link">
+        <a href="/CabinetMedicale/Logout" class="nav__link">
             <i class='bx bx-log-out nav__icon' ></i>
             <span class="nav__name">Se déconnecter</span>
         </a>
