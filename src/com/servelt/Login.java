@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.DAO.DoctorDAO;
 import com.DAO.UserDAO;
+import com.javaBeans.HomeData;
 import com.javaBeans.User;
 
 
@@ -46,7 +48,11 @@ public class Login extends HttpServlet {
                 //Vérifiez si est un médecin ou patient et dirige chacun vers sa espace
                 String  accountType = user.getAccountType() ;
                 if(accountType.equals("doctor")) {
-                	this.getServletContext().getRequestDispatcher("/WEB-INF/home_doctor.jsp").forward(request, response);
+            		DoctorDAO doctorDAO = new DoctorDAO();
+            		HomeData homeData;
+            		homeData = doctorDAO.getData();
+            		request.setAttribute("homeData",homeData);
+                	this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
                 }
                 else if(accountType.equals("patient")) {
                 	this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
