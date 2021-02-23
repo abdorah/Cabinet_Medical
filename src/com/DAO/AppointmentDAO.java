@@ -138,7 +138,7 @@ public class AppointmentDAO implements AppointmentService {
 	    String query;
 	    Appointment appointment;
 		
-		query="SELECT * FROM Appointment a, user u, patient p WHERE u.id = p.id_patient and p.id_patient = a.id_patient and DateofAppointment > NOW()";
+		query="SELECT * FROM Appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and DateofAppointment > NOW()";
 		connection=dbInstance.getConnection();
 		preStat=connection.prepareStatement(query);
 		result=preStat.executeQuery();
@@ -178,7 +178,7 @@ public class AppointmentDAO implements AppointmentService {
 	    String query;
 	    Appointment appointment;
 		
-		query="SELECT * FROM Appointment a, user u, patient p WHERE u.id = p.id_patient and p.id_patient = a.id_patient and DateofAppointment < NOW()";
+		query="SELECT * FROM Appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and DateofAppointment < NOW()";
 		connection=dbInstance.getConnection();
 		preStat=connection.prepareStatement(query);
 		result=preStat.executeQuery();
