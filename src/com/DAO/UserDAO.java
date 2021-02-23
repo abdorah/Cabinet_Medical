@@ -23,7 +23,7 @@ public class UserDAO implements UserService {
 	@Override
 	public User checkLogin(String email, String password) throws SQLException {
 		
-		query = "SELECT * FROM user WHERE email = ? and password = ?";
+		query = "SELECT * FROM USER WHERE email = ? and password = ?";
 		this.connection=dbInstance.getConnection();
 		preStat = connection.prepareStatement(query);
 		preStat.setString(1,email);
@@ -33,7 +33,7 @@ public class UserDAO implements UserService {
 		User user = null;
 		
 		if(result.next()) {
-			int id=result.getInt("id_user");
+			int id=result.getInt("id");
 			String firstName = result.getString("firstName");
 			String lastName = result.getString("lastName");
 			String phone = result.getString("phone");
@@ -44,44 +44,79 @@ public class UserDAO implements UserService {
 		return user;
 	}
 	//for register:
-	@Override
-	public boolean isExist(String email) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public int register(User user) {
 
-	@Override
-	public int register(User user) throws SQLException {
-	
+		try {
 			// connect to data base
-			connection = dbInstance.getConnection();
+			dbInstance=DbConfigDAO.getInstance();
+			Connection connection = dbInstance.getConnection();
 
 			//prepare statements
 			String insertQuery = "INSERT INTO USER (firstName,lastName,phone,email,password) VALUES (?,?,?,?,?)";
 			String maxQuery = "SELECT MAX(id) AS MID FROM USER";
-			preStat = connection.prepareStatement(insertQuery);
+			PreparedStatement cs = connection.prepareStatement(insertQuery);
 			PreparedStatement ms = connection.prepareStatement(maxQuery);
-			
+
 			//set attributes
-			preStat.setString(1, user.getFristName());
-			preStat.setString(2, user.getLastName());
-			preStat.setString(3, user.getPhone());
-			preStat.setString(4, user.getEmail());
-			preStat.setString(5, user.getPassword());
-			
+
+			cs.setString(1, user.getFristName());
+			cs.setString(2, user.getLastName());
+			cs.setString(3, user.getPhone());
+			cs.setString(4, user.getEmail());
+			cs.setString(5, user.getPassword());
+
 			// Execute statements
-			preStat.executeUpdate();
-			
+
+			cs.executeUpdate();
+
 			//set The ID
-			
+
 			ResultSet resultSet = ms.executeQuery();
 			if (resultSet.next()) {
 				user.setId(resultSet.getInt("MID"));
 			}
-			
+
 			// close statement
-			preStat.close();
-			return 0;
+			cs.close();
+
+
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user.getId();
+	}
+
+	@Override
+	public boolean isExist(String email) {
+		boolean exist = true;
+		try {
+			// connect to data base
+			dbInstance=DbConfigDAO.getInstance();
+			Connection connection = dbInstance.getConnection();
+
+			//prepare statements
+			String fetchQuery = "SELECT ID FROM USER WHERE email = ? ";
+			PreparedStatement cs = connection.prepareStatement(fetchQuery);
+
+			//set attributes
+			cs.setString(1, email);
+
+
+			// Execute statements
+			ResultSet resultSet = cs.executeQuery();
+
+			exist = resultSet.next() ? true : false ;
+
+			// close statement
+			cs.close();
+
+
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return exist ;
 	}
 
 }
