@@ -29,7 +29,7 @@ public class DoctorDAO implements DoctorService{
             PreparedStatement qs ;
 
             // queries for the above part of the page
-            String userQuery = "SELECT COUNT(*) AS userNbr FROM USER";
+            String userQuery = "SELECT COUNT(*) AS userNbr FROM user";
             String apoinQuery = " SELECT COUNT(*)   AS  appointmentNbr FROM appointment";
             String nxtQuery = " SELECT COUNT(*)   AS  NxtAppointmentNbr FROM appointment WHERE DateofAppointment > SYSDATE()";
             String doneQuery = " SELECT COUNT(*)  AS  doneConsultations FROM  consultation";
@@ -185,28 +185,6 @@ public class DoctorDAO implements DoctorService{
             qs.close();
 
             homeData.setMonthData(monthData);
-            // fetch the
-
-
-//            PreparedStatement as = connection.prepareStatement(apoinQuery);
-//            PreparedStatement ns = connection.prepareStatement(nxtQuery);
-//            PreparedStatement ds = connection.prepareStatement(doneQuery);
-
-
-//            qs.setString(1,"");
-
-             // execute statement
-//            ResultSet asresult = as.executeQuery();
-//            ResultSet nsresult = ns.executeQuery();
-//            ResultSet dsresult = ds.executeQuery();
-
-             //get the result and make it in the homeData object
-//            if (result.next()){
-//                homeData.setUsersNbr(result.getInt("userNbr"));
-//                homeData.setAppointmentNbr(result.getInt("appointmentNbr"));
-//                homeData.setNxtAppointmentNbr(result.getInt("NxtAppointmentNbr"));
-//                homeData.setDoneConsultations(result.getInt("doneConsultations"));
-//            }
 
         }catch (Exception e){
             System.out.println(e);

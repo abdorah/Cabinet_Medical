@@ -140,9 +140,7 @@ CREATE TABLE IF NOT EXISTS `prescription` (
 --
 
 INSERT INTO `prescription` (`id_prescription`, `title`, `dateOfPrescription`, `description`, `medicationList`) VALUES
-(18, 'Traitement d\'allergie', '2021-02-27', 'Traitement d\'allergie du peau', 'reno 20g - Alto 10g'),
-(19, 'DÃ©veloppeur web', '2021-02-27', 'qqqqqqq', 'qqqqqqqq');
-
+(18, 'Traitement d\'allergie', '2021-02-27', 'Traitement d\'allergie du peau', 'reno 20g - Alto 10g');
 -- --------------------------------------------------------
 
 --
