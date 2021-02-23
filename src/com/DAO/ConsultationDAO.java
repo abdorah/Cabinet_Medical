@@ -66,14 +66,33 @@ public class ConsultationDAO implements ConsultationService {
 	
 	@Override
 	public boolean addConsultation(Consultation consultation) throws SQLException {
-		String query = "INSERT INTO consultation(motif,ConsultationDate,price,id_prescription,id_patient) VALUES (?,?,?,?,?)";
+		
 		connection = dbInstance.getConnection();
-		PreparedStatement preStat = connection.prepareStatement(query);
-		preStat.setString(1, consultation.getMotif());
-		preStat.setString(2, consultation.getConsulationDate());
-		preStat.setDouble(3, consultation.getPrice());
-		preStat.setInt(4, consultation.getPrescription().getId_prescription());
-		preStat.setInt(5, consultation.getPatient().getId_user());
+		PreparedStatement preStat;
+		
+		if(consultation.getPrescription() != null) {
+			String query = "INSERT INTO consultation(motif,ConsultationDate,price,id_patient,id_prescription) VALUES (?,?,?,?,?)";
+			
+			preStat = connection.prepareStatement(query);
+			preStat.setString(1, consultation.getMotif());
+			preStat.setString(2, consultation.getConsulationDate());
+			preStat.setDouble(3, consultation.getPrice());
+			preStat.setInt(4, consultation.getPatient().getId_user());
+			preStat.setInt(5, consultation.getPrescription().getId_prescription());
+			
+		}else {
+			String query = "INSERT INTO consultation(motif,ConsultationDate,price,id_patient) VALUES (?,?,?,?)";
+			connection = dbInstance.getConnection();
+			preStat = connection.prepareStatement(query);
+			preStat.setString(1, consultation.getMotif());
+			preStat.setString(2, consultation.getConsulationDate());
+			preStat.setDouble(3, consultation.getPrice());
+			preStat.setInt(4, consultation.getPatient().getId_user());
+			
+			
+		}
+		
+		
 		
 		int result = preStat.executeUpdate();
 		

@@ -56,24 +56,22 @@ public class MedicalFileDAO implements MedicaleFileService {
 		int nbapp = result1.getInt("COUNT(*)");
 		
 		statistiques.put("appointments", (double) nbapp);
-		preStat1.close();
 		
 		String query2 = "SELECT COUNT(*) FROM consultation WHERE id_patient = ?";
-		preStat1 = connection.prepareStatement(query2);
-		preStat1.setInt(1, id_patient);
-		result1 = preStat1.executeQuery();
-		result1.next();
-		int nbcons = result1.getInt(1);
+		PreparedStatement preStat2 = connection.prepareStatement(query2);
+		preStat2.setInt(1, id_patient);
+		ResultSet result2 = preStat1.executeQuery();
+		result2.next();
+		int nbcons = result2.getInt(1);
 		
 		statistiques.put("consultations", (double) nbcons);
-		preStat1.close();
 		
 		String query3 = "SELECT COUNT(*) FROM consultation WHERE id_patient = ? and id_prescription is NOT NULL";
 		PreparedStatement preStat3 = connection.prepareStatement(query3);
 		preStat3.setInt(1, id_patient);
 		ResultSet result3 = preStat1.executeQuery();
 		result3.next();
-		int nbpresc = result3.getInt(1);
+		int nbpresc = result3.getInt("COUNT(*)");
 		
 		
 		
