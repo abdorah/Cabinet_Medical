@@ -4,21 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
-
-
 import com.javaBeans.Appointment;
-
-
-
-import java.util.ArrayList;
-import java.util.Date;
-
 import java.sql.Statement;
-import java.util.ArrayList;
-
-import com.javaBeans.Appointment;
 import com.javaBeans.Patient;
 
 public class AppointmentDAO implements AppointmentService {
@@ -120,7 +108,7 @@ public class AppointmentDAO implements AppointmentService {
 
 	
 
-	
+	@Override
 	public int SupprimerAppointmentPatient(int id_p) throws SQLException {
 
 	    PreparedStatement preStat;
@@ -140,7 +128,7 @@ public class AppointmentDAO implements AppointmentService {
 		return 0;
 	}
 	
-	   
+	@Override 
 	public ArrayList<Appointment> ListeAppointmentNF() throws SQLException {
 			
 	    PreparedStatement preStat;
@@ -180,7 +168,7 @@ public class AppointmentDAO implements AppointmentService {
 		}
 		return appointments;
 	}
-	
+	@Override
 	public ArrayList<Appointment> ListeAppointmentF() throws SQLException {
 		
 	    PreparedStatement preStat;
