@@ -31,96 +31,73 @@
 
 	<!-- debut cards -->
 	<div class="container-fluid" style="margin-top: 100px;">
+	
+		<%
+
+		if(request.getAttribute("action")!=null)
+		{ 
+
+		%>
+				<div class="alert alert-success" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span></button>
+				  	<strong>Informations !</strong> modifier.   	
+			    </div>
+    	<%
+			}
+		%>
+	    
 	    <h1 class="h3 mb-2 text-gray-800"><b>Dossier Médical : ${ medicalFile.id}</b></h1>
 	    <br>
 	    <div class="row">
-	        <div class="col-lg-6">
-	            <!-- Default Card Example -->
-	            <div class="card shadow mb-4">
-	                <div class="card-header py-3">
-	                    <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-id-card" aria-hidden="true"></i> &nbsp;Informations Personnelles</h6>
-	                </div>
-	                <%
-                   		MedicalFile medicalFile = (MedicalFile) request.getAttribute("medicalFile");
-                   		
-                   	%>
-	                <div class="card-body">
-                        <table class="table table-bordered table-striped" style="color: black;font-weight: bold;">
-                            <tbody>
-                            	<tr>
-	                                 <td>Genre : </td>
-	                                 <td>${ medicalFile.patient.sex}</td>
-	                            </tr>
-	                           	 <tr>
-	                                 <td>CIN : </td>
-	                                 <td>${ medicalFile.patient.cin}</td>
-	                            </tr>
-                                <tr>
-                                    <td>Nom : </td>
-                                    <td>${ medicalFile.patient.lastName}</td>
-                                </tr>
-                                <tr>
-                                    <td>Prénom : </td>
-                                    <td>${ medicalFile.patient.firstName}</td>
-                                </tr>
-                                <tr>
-                                    <td>Date de naissance : </td>
-                                    <td>${ medicalFile.patient.birthDate}</td>
-                                </tr>
-                                <tr>
-                                    <td>Télephone : </td>
-                                    <td>${ medicalFile.patient.phone}</td>
-                                </tr>
-                                <tr>
-                                    <td>Email : </td>
-                                    <td>${ medicalFile.patient.email}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-	                </div>
-	            </div>
-	        </div>
-	
-	        <div class="col-lg-6">
-	            <!-- Dropdown Card Example -->
-	            <div class="card shadow mb-4">
-	                <!-- Card Header - Dropdown -->
-	                <div
-	                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-	                    <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-table" aria-hidden="true"></i>&nbsp;Statistiques</h6>
-	
-	                </div>
-	                <!-- Card Body -->
-	                <div class="card-body">
-	                	<table class="table table-bordered table-striped" style="color: black;font-weight: bold;">
-	                        <tbody>
-	                        	<%
-	                        		
-	                        		HashMap<String,Double> statistiques = medicalFile.getStatistiques();
-	                        	%>
-	                            <tr>
-	                                <td>Total des rendez-vous : </td>
-	                                <td><%=statistiques.get("appointments")%></td>
-	                            </tr>
-	                            <tr>
-	                                <td>Total des consultations :</td>
-	                                <td><%=statistiques.get("consultations") %></td>
-	                            </tr>
-	                            <tr>
-	                                <td>Total des ordonnances</td>
-	                                <td><%=statistiques.get("prescriptions") %></td>
-	                            </tr>
-	                            
-	                            <tr>
-	                                <td>Total des frais payés :</td>
-	                                <td><%=statistiques.get("price") %></td>
-	                            </tr>
-	                        </tbody>
-                         </table>
-	                </div>
-	            </div>
-	
-	        </div>
+
+            <!-- Default Card Example -->
+            <div class="card shadow mb-4" style="width: 100%;">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-id-card" aria-hidden="true"></i> &nbsp;Informations Personnelles</h6>
+                </div>
+                <%
+                  		MedicalFile medicalFile = (MedicalFile) request.getAttribute("medicalFile");
+                %>
+                <div class="card-body">
+                       <table class="table table-bordered table-striped" style="color: black;font-weight: bold;">
+                           <tbody>
+                           	 <tr>
+                                 <td>CIN : </td>
+                                 <td>${ medicalFile.patient.cin}</td>
+                            </tr>
+                               <tr>
+                                   <td>Nom : </td>
+                                   <td>${ medicalFile.patient.lastName}</td>
+                               </tr>
+                               <tr>
+                                   <td>Prénom : </td>
+                                   <td>${ medicalFile.patient.firstName}</td>
+                               </tr>
+                               <tr>
+                                 <td>Genre : </td>
+                                 <td>${ medicalFile.patient.sex}</td>
+                            </tr>
+                               <tr>
+                                   <td>Date de naissance : </td>
+                                   <td>${ medicalFile.patient.birthDate}</td>
+                               </tr>
+                               <tr>
+                                   <td>Télephone : </td>
+                                   <td>${ medicalFile.patient.phone}</td>
+                               </tr>
+                               <tr>
+                                   <td>Email : </td>
+                                   <td>${ medicalFile.patient.email}</td>
+                               </tr>
+                           </tbody>
+                       </table>
+                       <a type="button" href="/CabinetMedicale/EditInfo" class="btn btn-success"> 
+						 <i class="fas fa-user-edit"></i>
+					</a>
+                </div>
+            </div>
+
 	        <!-- liste des rendez-vous -->
 			<div class="card shadow mb-4" style="width: 100%;">
 			    <div class="card-header py-3">

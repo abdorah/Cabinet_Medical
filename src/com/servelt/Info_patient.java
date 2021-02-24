@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.DAO.MedicalFileDAO;
+import com.DAO.PatientDAO;
 import com.javaBeans.MedicalFile;
 import com.javaBeans.User;
 
@@ -43,6 +44,23 @@ public class Info_patient extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
+		String tel = request.getParameter("tel");
+		String date_naiss = request.getParameter("date_naiss");
+		String Sex = request.getParameter("Sex");
+		
+		PatientDAO patientDAO = new PatientDAO();
+		try {
+			patientDAO.ModifierPation(id, prenom, nom, tel, email, date_naiss, Sex);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("action", "edit");
 		doGet(request, response);
 	}
 
