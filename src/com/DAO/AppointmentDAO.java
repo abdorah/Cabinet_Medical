@@ -114,7 +114,7 @@ public class AppointmentDAO implements AppointmentService {
 	    
 		connection=dbInstance.getConnection();
 		
-		query="DELETE FROM Appointment WHERE id_patient = ?  ";
+		query="DELETE FROM appointment WHERE id_patient = ?  ";
 		preStat=connection.prepareStatement(query);
 		preStat.setLong(1,id_p);
 		int r = preStat.executeUpdate();
@@ -134,7 +134,7 @@ public class AppointmentDAO implements AppointmentService {
 	    String query;
 	    Appointment appointment;
 		
-		query="SELECT * FROM Appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and DateofAppointment > NOW()";
+		query="SELECT * FROM appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and DateofAppointment > NOW()";
 		connection=dbInstance.getConnection();
 		preStat=connection.prepareStatement(query);
 		result=preStat.executeQuery();
@@ -167,6 +167,7 @@ public class AppointmentDAO implements AppointmentService {
 		}
 		return appointments;
 	}
+	
 	@Override
 	public ArrayList<Appointment> ListeAppointmentF() throws SQLException {
 		
@@ -175,7 +176,7 @@ public class AppointmentDAO implements AppointmentService {
 	    String query;
 	    Appointment appointment;
 		
-		query="SELECT * FROM Appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and DateofAppointment < NOW()";
+		query="SELECT * FROM appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and DateofAppointment < NOW()";
 		connection=dbInstance.getConnection();
 		preStat=connection.prepareStatement(query);
 		result=preStat.executeQuery();
@@ -207,5 +208,23 @@ public class AppointmentDAO implements AppointmentService {
 			appointments.add(appointment);						
 		}
 		return appointments;
+	}
+	
+	public int notification() throws SQLException {
+		
+	    PreparedStatement preStat;
+	    ResultSet result;
+	    String query;
+	    
+		query="select count(*) as nbN from appointment where notification = 0";
+		connection=dbInstance.getConnection();
+		preStat=connection.prepareStatement(query);
+		result=preStat.executeQuery();
+
+		result.next();
+
+		int nbNotification= result.getInt("nbN");
+
+		return nbNotification;
 	}
 }
