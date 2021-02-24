@@ -27,7 +27,7 @@
 
                 <a href="/CabinetMedicale/Info_patient" class="nav__link">
                     <i class='bx bx-user nav__icon' ></i>
-                    <span class="nav__name">Info</span>
+                    <span class="nav__name">Informations</span>
                 </a>
                 
                 <a href="/CabinetMedicale/Appointments" class="nav__link">

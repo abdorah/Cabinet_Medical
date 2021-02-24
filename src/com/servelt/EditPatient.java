@@ -45,7 +45,6 @@ public class EditPatient extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//doGet(request, response);
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		String nom = request.getParameter("nom");
