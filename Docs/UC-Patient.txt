@@ -1,0 +1,23 @@
+@startuml
+
+left to right direction
+actor Patient
+rectangle Patient_session {
+    title Use Case Diagram : Patient
+    
+    Patient -- (Créer un compte)
+    Patient -- (Prendre un RDV) 
+    Patient -- (Voir le dossier médical)
+    
+     
+    (Prendre un RDV) --> (S'authentifier) : <<include>>
+    (Voir le dossier médical) --> (S'authentifier) : <<include>>
+   
+    
+    (Voir le dossier médical) <-- (Modifier les informations personnelles) : <<extends>>
+    (Voir le dossier médical) <-- (Voir la liste des RDV) : <<extends>>
+     (Voir le dossier médical) <-- (Voir la listes des consultations) : <<extends>>
+    
+    
+}
+@enduml

@@ -69,9 +69,14 @@ public class MedicalFileS extends HttpServlet {
 			
 			try {
 				int id_consultation = Integer.parseInt(request.getParameter("id_consultation"));
-				int id_prescription = consultationDao.getConsultationById(id_consultation).getPrescription().getId_prescription();
+				if(consultationDao.getConsultationById(id_consultation).getPrescription()!=null) {
+					int id_prescription = consultationDao.getConsultationById(id_consultation).getPrescription().getId_prescription();
+					
+					boolean isDelete1 = prescriptionDao.deletePrescriptionById(id_prescription);
+				}else {
+					boolean isDelete1 = consultationDao.deleteConsultationById(id_consultation);
+				}
 				
-				boolean isDelete1 = prescriptionDao.deletePrescriptionById(id_prescription);
 				doGet(request, response);
 			} catch (SQLException e) {
 				

@@ -38,7 +38,7 @@ public class UserDAO implements UserService {
 		User user = null;
 		
 		if(result.next()) {
-			int id=result.getInt("id_user");
+			int id = result.getInt("id_user");
 			String firstName = result.getString("firstName");
 			String lastName = result.getString("lastName");
 			String phone = result.getString("phone");
