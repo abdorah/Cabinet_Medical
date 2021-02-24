@@ -97,7 +97,7 @@ public class AppointmentDAO implements AppointmentService {
 		Statement statement = connection.createStatement();
 
 		ResultSet result = statement.executeQuery("select  id_appointment from appointment where id_patient=" + "'"
-				+ appointment.getPatient() + "'" + ";");
+				+ appointment.getPatient().getId_user() + "'" + ";");
 
 		int id = 0;
 		while (result.next()) {
