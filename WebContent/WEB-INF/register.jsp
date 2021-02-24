@@ -35,14 +35,12 @@
                                     
                                     
                                 }
-                                .nom label{
-                                	font-weight: bold;
-                                }
+                               
                                
 
                             </style>
                             <div class="divsexe">
-		                        <label for="nom" style="padding-right:30px;font-weight: bold;">Genre</label>
+		                        <label for="nom" style="padding-right:30px;">Genre</label>
 		                        <input class="sexe" type="radio" name="sex" id="genre-m" value="Homme">
 		                        <label class="label" for="genre-m" style="padding-right:30px;">Homme</label>
 		                        <input class="sexe" type="radio" name="sex" id="genre-f" value="Femme" >
@@ -74,7 +72,7 @@
                             
                             
                            <br>
-                            <input type="submit" value="S'inscrire" class="btn btn-primary btn-block mb-3"> 
+                            <input type="submit" value="S'inscrire" class="btn btn-primary btn-block mb-3" style="margin-left: 33px;"> 
                            
                             <div class="text-danger text-center">
                                 <p class=""> ${message}</p>
