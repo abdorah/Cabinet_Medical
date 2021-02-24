@@ -2,46 +2,45 @@ package com.servelt;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.DAO.MedicalFileDAO;
 import com.DAO.PatientDAO;
-import com.javaBeans.Patient;
+import com.javaBeans.MedicalFile;
+import com.javaBeans.User;
 
-@WebServlet("/EditPatient")
-public class EditPatient extends HttpServlet {
+@WebServlet("/Info_patient")
+public class Info_patient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public EditPatient() {
+    public Info_patient() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-				
-		PatientDAO patientDAO = new PatientDAO();
+		
+		HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        
+		int id_patient = user.getId_user();
+		MedicalFileDAO medicalFileDao = new MedicalFileDAO();
 		
 		try {
-			int id_p = Integer.parseInt(request.getParameter("id"));
-			Patient patient = patientDAO.AfficherPation(id_p);
+			MedicalFile medicalFile = medicalFileDao.getMedicalFileById(id_patient);
 			
-			request.setAttribute("id", patient.getId_user());
-			request.setAttribute("prenom", patient.getFirstName());
-			request.setAttribute("nom", patient.getLastName());
-			request.setAttribute("tel", patient.getPhone());
-			request.setAttribute("email", patient.getEmail());
-			request.setAttribute("date_naiss", patient.getBirthDate());
-			request.setAttribute("sex", patient.getSex());
-
+			request.setAttribute("medicalFile",medicalFile);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/Info_patient.jsp").forward(request, response);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		this.getServletContext().getRequestDispatcher("/WEB-INF/EditPatient.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,20 +60,8 @@ public class EditPatient extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		ArrayList<Patient> patients = null; 
-		try {
-			patients = patientDAO.ListePatients();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		request.setAttribute("patients", patients);
-		request.setAttribute("nom", nom);
-		request.setAttribute("prenom", prenom);
 		request.setAttribute("action", "edit");
-		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/Table_Patients.jsp").forward(request, response);
-
+		doGet(request, response);
 	}
 
 }

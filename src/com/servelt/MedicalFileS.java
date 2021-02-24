@@ -17,7 +17,6 @@ import com.DAO.MedicalFileDAO;
 import com.DAO.PrescriptionDAO;
 import com.javaBeans.MedicalFile;
 
-
 @WebServlet("/MedicalFile")
 public class MedicalFileS extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,15 +42,12 @@ public class MedicalFileS extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("id_appointment") != null) {
 			int id_appointment = Integer.parseInt(request.getParameter("id_appointment"));
-			
 			
 			AppointmentDAO appointmentDao = new AppointmentDAO();
 			
@@ -69,6 +65,7 @@ public class MedicalFileS extends HttpServlet {
 			
 			try {
 				int id_consultation = Integer.parseInt(request.getParameter("id_consultation"));
+
 				if(consultationDao.getConsultationById(id_consultation).getPrescription()!=null) {
 					int id_prescription = consultationDao.getConsultationById(id_consultation).getPrescription().getId_prescription();
 					
@@ -77,17 +74,14 @@ public class MedicalFileS extends HttpServlet {
 					boolean isDelete1 = consultationDao.deleteConsultationById(id_consultation);
 				}
 				
+
 				doGet(request, response);
 			} catch (SQLException e) {
 				
 				e.printStackTrace();
 			}
 			
-		}
-		
-		
-		
-		
+		}	
 	}
 
 }

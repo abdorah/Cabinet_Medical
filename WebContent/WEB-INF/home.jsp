@@ -29,8 +29,7 @@
 		User user = (User) session.getAttribute("user");
 	%>
     <body id="body-pd">
-    	<%@ include file="side-bar.jsp" %>
-    	
+    	<%@ include file="side-bar_doctor.jsp" %>
     	
     	<div class="container-fluid" style="padding-top:5rem;">
             <!-- Page Heading -->

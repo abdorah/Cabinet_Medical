@@ -28,10 +28,26 @@ public class Login extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+    	HttpSession session = request.getSession();
+    	
+    	if(session.getAttribute("user")!=null) {
+    		User user = (User) session.getAttribute("user");
+    		String  accountType = user.getAccountType() ;
+            if(accountType.equals("doctor")) {
+        		DoctorDAO doctorDAO = new DoctorDAO();
+        		HomeData homeData;
+        		homeData = doctorDAO.getData();
+        		request.setAttribute("homeData",homeData);
+            	this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+            }
+            else if(accountType.equals("patient")) {
+            	this.getServletContext().getRequestDispatcher("/WEB-INF/home_patient.jsp").forward(request, response);
+            }
+    	}
+    	
 		this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -48,14 +64,16 @@ public class Login extends HttpServlet {
                 //Vérifiez le type de compte de user:
                 String  accountType = user.getAccountType() ;
                 if(accountType.equals("doctor")) {
+
                 	DoctorDAO doctorDAO = new DoctorDAO();
             		HomeData homeData;
             		homeData = doctorDAO.getData();
             		request.setAttribute("homeData",homeData);
             		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+
                 }
                 else if(accountType.equals("patient")) {
-                	this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+                	this.getServletContext().getRequestDispatcher("/WEB-INF/home_patient.jsp").forward(request, response);
                 }
                 				
 			}

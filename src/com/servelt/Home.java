@@ -23,7 +23,6 @@ public class Home extends HttpServlet {
 
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// call Dao to bring data from database
 		DoctorDAO doctorDAO = new DoctorDAO();
@@ -32,7 +31,6 @@ public class Home extends HttpServlet {
 		request.setAttribute("homeData",homeData);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
