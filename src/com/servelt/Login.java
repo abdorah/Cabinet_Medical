@@ -15,7 +15,8 @@ import com.DAO.UserDAO;
 import com.javaBeans.HomeData;
 import com.javaBeans.User;
 
-@WebServlet({"/Login", "/"})
+//@WebServlet({"/Login", "/"})
+@WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
