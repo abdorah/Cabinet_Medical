@@ -10,15 +10,4 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <servlet>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>com.servelt.Login</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>Login</servlet-name>
-    <url-pattern>/</url-pattern>
-  </servlet-mapping>
-  
-  
 </web-app>
