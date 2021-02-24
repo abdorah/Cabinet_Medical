@@ -48,7 +48,7 @@ public class UserDAO implements UserService {
 			user = new User(id,cin,firstName,lastName,phone,email,password);
 			user.setAccountType(accountType);
 		}
-		connection.close();
+		//connection.close();
 		return user;
 	}
 	//for register:
