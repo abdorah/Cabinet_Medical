@@ -1,1 +1,1 @@
-# Application de gestion de cabinet médicale
+# Application de gestion de cabinet médical
