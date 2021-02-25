@@ -97,7 +97,7 @@ public class AppointmentDAO implements AppointmentService {
 		Statement statement = connection.createStatement();
 
 		ResultSet result = statement.executeQuery("select  id_appointment from appointment where id_patient=" + "'"
-				+ appointment.getPatient() + "'" + ";");
+				+ appointment.getPatient().getId_user() + "'" + ";");
 
 		int id = 0;
 		while (result.next()) {
@@ -114,7 +114,7 @@ public class AppointmentDAO implements AppointmentService {
 	    
 		connection=dbInstance.getConnection();
 		
-		query="DELETE FROM Appointment WHERE id_patient = ?  ";
+		query="DELETE FROM appointment WHERE id_patient = ?  ";
 		preStat=connection.prepareStatement(query);
 		preStat.setLong(1,id_p);
 		int r = preStat.executeUpdate();
@@ -134,7 +134,7 @@ public class AppointmentDAO implements AppointmentService {
 	    String query;
 	    Appointment appointment;
 		
-		query="SELECT * FROM Appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and DateofAppointment > NOW()";
+		query="SELECT * FROM appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and DateofAppointment > NOW()";
 		connection=dbInstance.getConnection();
 		preStat=connection.prepareStatement(query);
 		result=preStat.executeQuery();
@@ -167,6 +167,7 @@ public class AppointmentDAO implements AppointmentService {
 		}
 		return appointments;
 	}
+	
 	@Override
 	public ArrayList<Appointment> ListeAppointmentF() throws SQLException {
 		
@@ -175,7 +176,83 @@ public class AppointmentDAO implements AppointmentService {
 	    String query;
 	    Appointment appointment;
 		
-		query="SELECT * FROM Appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and DateofAppointment < NOW()";
+		query="SELECT * FROM appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and DateofAppointment < NOW()";
+		connection=dbInstance.getConnection();
+		preStat=connection.prepareStatement(query);
+		result=preStat.executeQuery();
+
+		ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+		Patient patient=null;
+		
+		while(result.next()) {
+			int id_patient= result.getInt("id_patient");
+			String cin=result.getString("cin");
+			String firstName=result.getString("firstName");
+			String lastName=result.getString("lastName");
+			String phone=result.getString("phone");
+			String email=result.getString("email");
+			String password=result.getString("password");
+			String birthDate= result.getString("birthDate");
+			String sex=result.getString("sex");
+
+			patient = new Patient(id_patient, cin, firstName, lastName, phone, email, password, birthDate, sex);
+			
+			int id_appointment= result.getInt("id_appointment");
+			String dateofChecking=result.getString("DateofChecking");
+			String dateofAppointment=result.getString("DateofAppointment");
+			String description=result.getString("Description");
+			String typeofIllness=result.getString("TypeofIllness");
+			boolean notification=result.getBoolean("notification");
+			
+			appointment = new Appointment(id_appointment, dateofChecking, dateofAppointment, description, typeofIllness, notification, patient);
+			appointments.add(appointment);						
+		}
+		return appointments;
+	}
+	
+	public int notification() throws SQLException {
+		
+	    PreparedStatement preStat;
+	    ResultSet result;
+	    String query;
+	    
+		query="select count(*) as nbN from appointment where notification = 0";
+		connection=dbInstance.getConnection();
+		preStat=connection.prepareStatement(query);
+		result=preStat.executeQuery();
+
+		result.next();
+
+		int nbNotification= result.getInt("nbN");
+
+		return nbNotification;
+	}
+	
+	public int Updatenotification() throws SQLException {
+		
+	    PreparedStatement preStat;
+	    String query;	    
+		connection=dbInstance.getConnection();
+
+		query="UPDATE appointment SET notification = 1 ";
+		preStat=connection.prepareStatement(query);
+		int r = preStat.executeUpdate();
+
+		if(r>0) {
+			return 1;
+		}
+			
+		return 0;
+	}
+	
+	public ArrayList<Appointment> NouveauRendeVous() throws SQLException {
+		
+	    PreparedStatement preStat;
+	    ResultSet result;
+	    String query;
+	    Appointment appointment;
+		
+		query="SELECT * FROM appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and notification = 0 LIMIT 5;";
 		connection=dbInstance.getConnection();
 		preStat=connection.prepareStatement(query);
 		result=preStat.executeQuery();

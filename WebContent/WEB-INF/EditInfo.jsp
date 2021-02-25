@@ -27,7 +27,7 @@
 	%>
     
     <body id="body-pd">
-    	<%@ include file="side-bar.jsp" %>jjnjnjnjn
+    	<%@ include file="side-bar.jsp" %>
     	
     	<div class="container-fluid" style="padding-top:5rem;">
         	

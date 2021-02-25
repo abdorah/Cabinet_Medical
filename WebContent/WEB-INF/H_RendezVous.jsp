@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
+
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- ===== BOX ICONS ===== -->
@@ -17,6 +19,7 @@
      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 
      <title>Liste Rendez-Vous H</title>
+
     </head>
 
     <%@ page import = "com.javaBeans.Appointment" %>
@@ -25,28 +28,28 @@
 	
 	<body id="body-pd">
 	
-	<%@ include file="side-bar_doctor.jsp" %>
+	<%@ include file="side-bar_doctor.jsp" %>	
 	
-	<%
-		ArrayList<Appointment> appointments = (ArrayList<Appointment>) request.getAttribute("appointments");
-
-		if(request.getAttribute("action")!=null)
-		{ 
-			if(request.getAttribute("action").equals("supprimer"))
-			{
-	%>
-				<div class="alert alert-danger" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				  	<strong>Rendez-Vous ! numéro <%= request.getAttribute("id_A") %></strong> est supprimer.   	
-			    </div>
-    <%
+		<!-- Begin Page Content -->
+		<div class="container-fluid" style="padding-top:1rem;">
+		<%
+			ArrayList<Appointment> appointments = (ArrayList<Appointment>) request.getAttribute("appointments");
+	
+			if(request.getAttribute("action")!=null)
+			{ 
+				if(request.getAttribute("action").equals("supprimer"))
+				{
+		%>
+					<div class="alert alert-danger" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span></button>
+					  	<strong>Rendez-Vous ! numéro <%= request.getAttribute("id_A") %></strong> est supprimer.   	
+				    </div>
+	    <%
+				}
 			}
-		}
-	%>
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
-
+		%>
+		
         <!-- Page Heading -->
         <p class="mb-4">
         	Voici tous les rendez-vous déjà pris
@@ -103,30 +106,29 @@
         </div>
 
     </div>
-	    <!-- End of Main Content -->
-			
-        <!-- footer -->
-		<%@ include file="footer.jsp" %>
-		<!-- fin footer -->
+    <!-- End of Main Content -->
 		
-		<!--===== MAIN JS =====-->
-        <script src="js/main.js"></script>
+       <!-- footer -->
+	<%@ include file="footer.jsp" %>
+	<!-- fin footer -->
 	
-		<!-- Custom scripts for all pages-->
-	    <script src="js/sb-admin-2.min.js"></script>
-	
-		<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-		<!--script dataTable-->
-	    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-	    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-	    
-	    <script>
-            
-	       	$(document).ready(function() {
-	            var table = $('#dataTable').DataTable();
-	   		 } );
-    	</script>
+	<!--===== MAIN JS =====-->
+       <script src="js/main.js"></script>
 
-    </body>
+	<!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+	<!--script dataTable-->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    
+    <script>     
+       	$(document).ready(function() {
+            var table = $('#dataTable').DataTable();
+   		 } );
+   	</script>
+
+   </body>
 </html>

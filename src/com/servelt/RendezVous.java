@@ -28,8 +28,13 @@ public class RendezVous extends HttpServlet {
 		AppointmentDAO appointmentDAO = new AppointmentDAO();
 		
 		if(type.equals("A")) {
-			
+			System.out.println("ffffff");
 			try {
+				String notification = request.getParameter("notification");
+				System.out.println(notification);
+				if(notification.equals("true")) {
+					int t = appointmentDAO.Updatenotification();	
+				}
 				ArrayList<Appointment> appointments = appointmentDAO.ListeAppointmentNF();
 				
 				request.setAttribute("appointments", appointments);

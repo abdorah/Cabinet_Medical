@@ -20,10 +20,8 @@ import com.javaBeans.User;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
     public Login() {
         super();
-      
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,41 +50,38 @@ public class Login extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		
 		UserDAO userDAO = new UserDAO();
+		User user = null ;
 		
 		try {
-			User user=userDAO.checkLogin(email, password);
-			if(user != null) {
-				HttpSession session = request.getSession();
-                session.setAttribute("user", user);
-                
-                //Vérifiez le type de compte de user:
-                String  accountType = user.getAccountType() ;
-                if(accountType.equals("doctor")) {
-
-                	DoctorDAO doctorDAO = new DoctorDAO();
-            		HomeData homeData;
-            		homeData = doctorDAO.getData();
-            		request.setAttribute("homeData",homeData);
-            		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-
-                }
-                else if(accountType.equals("patient")) {
-                	this.getServletContext().getRequestDispatcher("/WEB-INF/home_patient.jsp").forward(request, response);
-                }
-                				
-			}
-			else {
-				String message = "Email et/ou Mot de passe incorrect(s)";
-                request.setAttribute("message", message);
-                doGet(request, response);
-                
-			}
+			user=userDAO.checkLogin(email, password);
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
+		
+		if(user != null) {
+			HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            
+            //Vérifiez si est un médecin ou patient et dirige chacun vers sa espace
+            String  accountType = user.getAccountType() ;
+            if(accountType.equals("doctor")) {
+        		DoctorDAO doctorDAO = new DoctorDAO();
+        		HomeData homeData;
+        		homeData = doctorDAO.getData();
+        		request.setAttribute("homeData",homeData);
+            	this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+            }
+            else if(accountType.equals("patient")) {
+            	this.getServletContext().getRequestDispatcher("/WEB-INF/home_patient.jsp").forward(request, response);
+            }
+            				
+		}
+		else {
+			String message = "Email et/ou Mot de passe incorrect(s)";
+            request.setAttribute("message", message);
+            doGet(request, response);                
+		}
 	}
-
 }
