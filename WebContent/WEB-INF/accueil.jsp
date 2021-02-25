@@ -40,7 +40,7 @@
                 <li class=""><a href="#service">Services</a></li>
                 <li class=""><a href="#doctor-team">A propos</a></li>
                 
-                <li class=""><a href="#contact">Contact</a></li>
+                <li class=""><a href="#contact">Contacts</a></li>
               </ul>
             </div>
           </div>
@@ -83,7 +83,7 @@
               <i class="fa fa-stethoscope"></i>
             </div>
             <div class="icon-info">
-              <h4>Diagnostic médicale</h4>
+              <h4>Diagnostic médical</h4>
               
             </div>
           </div>
