@@ -227,4 +227,62 @@ public class AppointmentDAO implements AppointmentService {
 
 		return nbNotification;
 	}
+	
+	public int Updatenotification() throws SQLException {
+		
+	    PreparedStatement preStat;
+	    String query;	    
+		connection=dbInstance.getConnection();
+
+		query="UPDATE appointment SET notification = 1 ";
+		preStat=connection.prepareStatement(query);
+		int r = preStat.executeUpdate();
+
+		if(r>0) {
+			return 1;
+		}
+			
+		return 0;
+	}
+	
+	public ArrayList<Appointment> NouveauRendeVous() throws SQLException {
+		
+	    PreparedStatement preStat;
+	    ResultSet result;
+	    String query;
+	    Appointment appointment;
+		
+		query="SELECT * FROM appointment a, user u, patient p WHERE u.id_user = p.id_patient and p.id_patient = a.id_patient and notification = 0 LIMIT 5;";
+		connection=dbInstance.getConnection();
+		preStat=connection.prepareStatement(query);
+		result=preStat.executeQuery();
+
+		ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+		Patient patient=null;
+		
+		while(result.next()) {
+			int id_patient= result.getInt("id_patient");
+			String cin=result.getString("cin");
+			String firstName=result.getString("firstName");
+			String lastName=result.getString("lastName");
+			String phone=result.getString("phone");
+			String email=result.getString("email");
+			String password=result.getString("password");
+			String birthDate= result.getString("birthDate");
+			String sex=result.getString("sex");
+
+			patient = new Patient(id_patient, cin, firstName, lastName, phone, email, password, birthDate, sex);
+			
+			int id_appointment= result.getInt("id_appointment");
+			String dateofChecking=result.getString("DateofChecking");
+			String dateofAppointment=result.getString("DateofAppointment");
+			String description=result.getString("Description");
+			String typeofIllness=result.getString("TypeofIllness");
+			boolean notification=result.getBoolean("notification");
+			
+			appointment = new Appointment(id_appointment, dateofChecking, dateofAppointment, description, typeofIllness, notification, patient);
+			appointments.add(appointment);						
+		}
+		return appointments;
+	}
 }

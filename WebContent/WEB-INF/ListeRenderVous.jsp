@@ -25,28 +25,28 @@
 	
 	<body id="body-pd">
 	
-	<%@ include file="side-bar_doctor.jsp" %>
+	<%@ include file="side-bar_doctor.jsp" %>	
 	
-	<%
-		ArrayList<Appointment> appointments = (ArrayList<Appointment>) request.getAttribute("appointments");
-
-		if(request.getAttribute("action")!=null)
-		{ 
-			if(request.getAttribute("action").equals("supprimer"))
-			{
-	%>
-				<div class="alert alert-danger" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				  	<strong>Rendez-Vous ! numéro <%= request.getAttribute("id_A") %></strong> est supprimer.   	
-			    </div>
-    <%
+		<!-- Begin Page Content -->
+		<div class="container-fluid" style="padding-top:1rem;">
+		
+		<%
+			ArrayList<Appointment> appointments = (ArrayList<Appointment>) request.getAttribute("appointments");
+	
+			if(request.getAttribute("action")!=null)
+			{ 
+				if(request.getAttribute("action").equals("supprimer"))
+				{
+		%>
+					<div class="alert alert-danger" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span></button>
+					  	<strong>Rendez-Vous ! numéro <%= request.getAttribute("id_A") %></strong> est supprimer.   	
+				    </div>
+	    <%
+				}
 			}
-		}
-	%>
-    
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
+		%>
 
         <!-- Page Heading -->
         <p class="mb-4">
