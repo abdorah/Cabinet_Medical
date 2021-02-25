@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <title>Rendez-vous</title>
+    <title>Prendre un rendez-vous</title>
 </head>
 
 <body id="body-pd">
