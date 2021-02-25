@@ -1,0 +1,61 @@
+@startuml
+
+title Class diagram
+
+class User{
+  - Int id
+  - String firstName
+  - String phone
+  - String email
+  - String password
+  
+}
+
+class Doctor extends User {
+    - String speciality
+}
+
+class Patient extends User {
+    - Date birthDate
+    - String sex
+
+}
+
+class Appointment{
+    - int id_appointment
+    - String dateofChecking
+	- String dateofAppointment
+	- String description
+	- String typeofIllness
+	- boolean notification
+
+}
+
+class Consultation{
+    - int id_consultation
+    - String motif
+    - String consulationDate
+    - double price
+    - Prescription prescription
+
+}
+class Prescription{
+    - int id_prescription
+    - String title
+    - String dateOfPrescription
+    - String description
+    - String medicationList
+}
+
+class MedicalFile{
+    - String id
+    - HashMap<String,Double> statistiques
+
+}
+MedicalFile "1" *-- "0,*" Consultation : Contenir
+MedicalFile "1" -- "1" Patient : Possèder
+MedicalFile "1" *-- "0,*" Appointment : Contenir
+Consultation "1" -- "0,1" Prescription : associer
+
+
+@enduml

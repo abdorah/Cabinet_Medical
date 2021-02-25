@@ -25,16 +25,12 @@ public class RendezVous extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		String type = request.getParameter("type");
-		AppointmentDAO appointmentDAO = new AppointmentDAO();
-		System.out.println("ffffff");
+		AppointmentDAO appointmentDAO = new AppointmentDAO();		
 		
 		if(type.equals("A")) {
+			
 			try {				
-				if(request.getParameter("notification")!=null) {
-					System.out.println("fffhhhhhhyyyy");
-					//int t = appointmentDAO.Updatenotification();	
-					//System.out.println("ffff" + t);
-				}
+				
 				ArrayList<Appointment> appointments = appointmentDAO.ListeAppointmentNF();
 				
 				request.setAttribute("appointments", appointments);

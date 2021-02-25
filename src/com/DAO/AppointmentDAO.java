@@ -64,7 +64,7 @@ public class AppointmentDAO implements AppointmentService {
 
 			appointmentList.add(this.getAppointmentById(result.getInt("id_appointment")));
 		}
-		return appointmentList;
+		return appointmentList; 
 	}
 
 	@Override

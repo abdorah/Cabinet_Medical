@@ -1,0 +1,28 @@
+@startuml
+
+
+actor Docteur
+rectangle Doctor_session {
+    title Use Case Diagram : Doctor
+    
+    Docteur -- (Voir la liste des patients) 
+    Docteur -- (Voir la liste des RDV)
+    Docteur -- (Voir les statistiques)
+    
+    (Voir le dossier du patient)  -->  (Voir la liste des patients) :<<extends>>
+    (Modifier les informations du patient) --> (Voir la liste des patients) :<<extends>>
+    (Supprimer le patient) --> (Voir la liste des patients) :<<extends>>
+    
+    (Voir la liste des patients) --> (S'authentifier) : <<include>>
+    (Voir la liste des RDV) --> (S'authentifier): <<include>>
+    (Voir les statistiques)  --> (S'authentifier): <<include>>
+    
+     (Supprimer un RDV du patient) --> (Voir le dossier du patient):<<extends>>
+     (Ajouter une consultation) --> (Voir le dossier du patient):<<extends>>
+     (Voir les consultations du patient) --> (Voir le dossier du patient):<<extends>>
+     
+     (Supprimer un RDV) --> (Voir la liste des RDV): <<extends>>
+     
+     (Ajouter une consultation) --> (Ajouter un ordonnance):<<extends>>
+}
+@enduml

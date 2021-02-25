@@ -1,8 +1,7 @@
+
 package com.servelt;
 
 import java.io.IOException;
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,7 +58,7 @@ public class Register extends HttpServlet {
 			try {
 				boolean isExist = userDAO.isExist(email,cin);	
 				if(isExist) {
-					String message = "cet email est d√©j√† utilis√©.Essayer un autre";
+					String message = "cet email est dÈj‡ utilisÈ.Essayer un autre";
 	                request.setAttribute("message", message);
 	                this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 					
@@ -75,7 +74,7 @@ public class Register extends HttpServlet {
 			}
 			
 		}else {
-			String message = "Mot de passe non confirm√©!";
+			String message = "Mot de passe non confirmÈ!";
 			request.setAttribute("message", message);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
 		}
@@ -84,4 +83,3 @@ public class Register extends HttpServlet {
 	}
 
 }
-

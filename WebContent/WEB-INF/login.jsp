@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta lang="UTF-8">
-        <title>Page de connexion</title>
+        <title>Connexion</title>
         <link rel="stylesheet" href="css/login.css">
         <!--Jquery-->
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

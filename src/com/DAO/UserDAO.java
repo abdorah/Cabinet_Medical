@@ -38,7 +38,7 @@ public class UserDAO implements UserService {
 		User user = null;
 		
 		if(result.next()) {
-			int id=result.getInt("id_user");
+			int id = result.getInt("id_user");
 			String firstName = result.getString("firstName");
 			String lastName = result.getString("lastName");
 			String phone = result.getString("phone");
@@ -48,7 +48,9 @@ public class UserDAO implements UserService {
 			user = new User(id,cin,firstName,lastName,phone,email,password);
 			user.setAccountType(accountType);
 		}
-		//connection.close();
+
+		preStat.close();
+
 		return user;
 	}
 	//for register:
