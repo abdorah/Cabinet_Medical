@@ -28,9 +28,7 @@ public class RendezVous extends HttpServlet {
 		AppointmentDAO appointmentDAO = new AppointmentDAO();		
 		
 		if(type.equals("A")) {
-			
 			try {				
-				
 				ArrayList<Appointment> appointments = appointmentDAO.ListeAppointmentNF();
 				
 				request.setAttribute("appointments", appointments);
@@ -40,7 +38,19 @@ public class RendezVous extends HttpServlet {
 			}
 			this.getServletContext().getRequestDispatcher("/WEB-INF/ListeRenderVous.jsp").forward(request, response);
 		}
-		else {
+		else if(type.equals("N")) {
+			try {
+				appointmentDAO.Updatenotification();
+				ArrayList<Appointment> appointments = appointmentDAO.ListeAppointmentNF();
+				
+				request.setAttribute("appointments", appointments);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			this.getServletContext().getRequestDispatcher("/WEB-INF/ListeRenderVous.jsp").forward(request, response);
+		} 
+		else if(type.equals("H")) {
 			try {
 				ArrayList<Appointment> appointments = appointmentDAO.ListeAppointmentF();
 				

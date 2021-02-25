@@ -80,7 +80,7 @@ public class AppointmentDAO implements AppointmentService {
 
 	}
 	@Override
-	public int takeAppointment(Appointment appointment) throws SQLException {
+	public boolean takeAppointment(Appointment appointment) throws SQLException {
 		String query = "insert into appointment(DateofChecking, DateofAppointment, id_patient, TypeofIllness, Description, notification) values(NOW(),?,?,?,?,?);";
 		connection = dbInstance.getConnection();
 		PreparedStatement preStat = connection.prepareStatement(query);
@@ -92,18 +92,9 @@ public class AppointmentDAO implements AppointmentService {
 		preStat.setString(4, appointment.getDescription());
 		preStat.setInt(5, appointment.isNotification() ? 1 : 0);
 		
-		preStat.execute();
+		boolean r = preStat.execute();
 
-		Statement statement = connection.createStatement();
-
-		ResultSet result = statement.executeQuery("select  id_appointment from appointment where id_patient=" + "'"
-				+ appointment.getPatient().getId_user() + "'" + ";");
-
-		int id = 0;
-		while (result.next()) {
-			id = result.getInt("id_appointment");
-		}
-		return id;
+		return r;
     }
 
 	@Override

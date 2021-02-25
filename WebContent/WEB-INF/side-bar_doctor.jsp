@@ -92,7 +92,7 @@
 						%>  	 
 		
 		                <li class="show_all">
-		                    <a href="/CabinetMedicale/RendezVous?type=A?notification=true" class="link">Show All Activities</a>
+		                    <a href="/CabinetMedicale/RendezVous?type=N" class="link">Afficher toutes les Rendez-Vous</a>
 		                </li> 
 		            </ul>
 		        </div>

@@ -49,13 +49,13 @@ public class Appointments extends HttpServlet {
         try {
             Patient patient = patientDao.getPatientById(user.getId_user());
             Appointment appointment = new Appointment(date, description, typeofIllness, false, patient);
-            if(appointmentDao.takeAppointment(appointment)!=0) {
-                appointment.setId_appointment(appointmentDao.takeAppointment(appointment));
-            }
             
-            this.getServletContext().getRequestDispatcher("/WEB-INF/home_patient.jsp").forward(request, response);
+            appointmentDao.takeAppointment(appointment);
+            
         } catch (SQLException e2) {
             e2.printStackTrace();
         }
+        request.setAttribute("action", "effectue");
+        this.getServletContext().getRequestDispatcher("/WEB-INF/home_patient.jsp").forward(request, response);
     }
 }
