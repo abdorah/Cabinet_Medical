@@ -2,12 +2,12 @@ const prepareChart = (resultData)=>{
     // Bind data
     let myData = {
         labels: [
-            'Janvier', "Fevrier", 'Mars', 'Avril','Mai','Join' ,'Juillet','out','September','November','December'
+            'Janvier', "Février", 'Mars', 'Avril','Mai','Juin' ,'Juillet','Août','September','November','Décember'
         ],
 
         datasets: [
             {
-                label: 'diagrame',
+                label: 'diagramme',
                 backgroundColor: [
                     'rgb(255, 154, 53,0.8)', 'rgb(62, 158, 255,0.8)', 'rgb(0, 196, 0,0.8)', 'rgb(255, 30, 30,0.8)','rgb(255, 144, 53,0.8)', 'rgb(652, 158, 255,0.8)', 'rgb(60, 196, 0,0.8)', 'rgb(655, 30, 30,0.8)', 'rgb(275, 30, 30,0.8)', 'rgb(0, 176, 0,0.8)', 'rgb(255, 303, 30,0.8)', 'rgb(255, 30, 30,3.8)'
                 ],
