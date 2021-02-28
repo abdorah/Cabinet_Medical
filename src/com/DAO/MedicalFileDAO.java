@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 import com.javaBeans.MedicalFile;
+import com.javaBeans.Patient;
 
 
 public class MedicalFileDAO implements MedicaleFileService {
@@ -26,10 +27,14 @@ public class MedicalFileDAO implements MedicaleFileService {
 	public MedicalFile getMedicalFileById(int id_patient) throws SQLException {
 		MedicalFile medicalFile = new MedicalFile();
 		
-		medicalFile.setId("KA1010110");
+		
 		
 		PatientDAO patientDao = new PatientDAO();
-		medicalFile.setPatient(patientDao.getPatientById(id_patient));
+		Patient patient = patientDao.getPatientById(id_patient);
+		medicalFile.setPatient(patient);
+		
+		String id = ""+patient.getFirstName().substring(0, 1)+patient.getLastName().substring(0, 1)+"-"+patient.getBirthDate();
+		medicalFile.setId(id);
 		
 		AppointmentDAO appointmentDao = new AppointmentDAO();
 		medicalFile.setAppointmentList(appointmentDao.getAllAppointmentById(id_patient));
@@ -87,7 +92,7 @@ public class MedicalFileDAO implements MedicaleFileService {
 		
 		statistiques.put("price", String.valueOf(totalPrice));
 		preStat.close();
-		System.out.print(statistiques);
+		
 		
 		return statistiques;
 	}
