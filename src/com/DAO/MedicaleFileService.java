@@ -8,6 +8,6 @@ import com.javaBeans.MedicalFile;
 
 public interface MedicaleFileService {
 	public MedicalFile getMedicalFileById(int id) throws SQLException;
-	public Map<String,Double> getStatistiquesById(int id_patient) throws SQLException;
+	public Map<String,String> getStatistiquesById(int id_patient) throws SQLException;
 
 }

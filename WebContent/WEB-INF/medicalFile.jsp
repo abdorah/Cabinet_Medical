@@ -45,7 +45,7 @@
 
 	<!-- debut cards -->
 	<div class="container-fluid" style="margin-top: 100px;">
-	    <h1 class="h3 mb-2 text-gray-800"><b>Dossier Médical : ${ medicalFile.id}</b></h1>
+	    <h1 class="h3 mb-2 text-gray-800"><b>Dossier médical : ${ medicalFile.id}</b></h1>
 	    <br>
 	    <div class="row">
 	        <div class="col-lg-6">
@@ -110,7 +110,7 @@
 	                        <tbody>
 	                        	<%
 	                        		
-	                        		HashMap<String,Double> statistiques = medicalFile.getStatistiques();
+	                        		HashMap<String,String> statistiques = medicalFile.getStatistiques();
 	                        	%>
 	                            <tr>
 	                                <td>Total des rendez-vous : </td>
@@ -127,7 +127,7 @@
 	                            
 	                            <tr>
 	                                <td>Total des frais payés :</td>
-	                                <td><%=statistiques.get("price") %></td>
+	                                <td><%=statistiques.get("price")+" DHS" %></td>
 	                            </tr>
 	                        </tbody>
                          </table>

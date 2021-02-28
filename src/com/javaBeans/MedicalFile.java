@@ -8,7 +8,7 @@ public class MedicalFile {
 	private Patient patient;
 	private ArrayList<Appointment> appointmentList;
 	private ArrayList<Consultation> consultationList;
-	private HashMap<String,Double> statistiques;
+	private HashMap<String,String> statistiques;
 	
 	
 	public MedicalFile() {
@@ -38,10 +38,10 @@ public class MedicalFile {
 	public void setAppointmentList(ArrayList<Appointment> appointmentList) {
 		this.appointmentList = appointmentList;
 	}
-	public HashMap<String,Double> getStatistiques() {
+	public HashMap<String,String> getStatistiques() {
 		return statistiques;
 	}
-	public void setStatistiques(HashMap<String,Double> statistiques) {
+	public void setStatistiques(HashMap<String,String> statistiques) {
 		this.statistiques = statistiques;
 	}
 	

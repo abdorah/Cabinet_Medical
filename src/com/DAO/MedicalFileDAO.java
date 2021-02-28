@@ -42,47 +42,53 @@ public class MedicalFileDAO implements MedicaleFileService {
 		
 		
 	}
-	public HashMap<String,Double> getStatistiquesById(int id_patient) throws SQLException{
-		HashMap<String,Double> statistiques = new HashMap<String,Double>();
-		
+	public HashMap<String,String> getStatistiquesById(int id_patient) throws SQLException{
+		HashMap<String,String> statistiques = new HashMap<String,String>();
+		PreparedStatement preStat;
+		ResultSet result;
+		//
 		String query1 = "SELECT COUNT(*) FROM appointment WHERE id_patient = ?";
-		PreparedStatement preStat1 = connection.prepareStatement(query1);
-		preStat1.setInt(1, id_patient);
-		ResultSet result1 = preStat1.executeQuery();
-		result1.next();
-		int nbapp = result1.getInt("COUNT(*)");
+		preStat = connection.prepareStatement(query1);
+		preStat.setInt(1, id_patient);
+		result = preStat.executeQuery();
+		result.next();
+		int nbapp = result.getInt("COUNT(*)");
 		
-		statistiques.put("appointments", (double) nbapp);
-		
+		statistiques.put("appointments",String.valueOf(nbapp));
+		preStat.close();
+		//
 		String query2 = "SELECT COUNT(*) FROM consultation WHERE id_patient = ?";
-		PreparedStatement preStat2 = connection.prepareStatement(query2);
-		preStat2.setInt(1, id_patient);
-		ResultSet result2 = preStat1.executeQuery();
-		result2.next();
-		int nbcons = result2.getInt(1);
+		preStat = connection.prepareStatement(query2);
+		preStat.setInt(1, id_patient);
+		result = preStat.executeQuery();
+		result.next();
+		int nbcons = result.getInt(1);
 		
-		statistiques.put("consultations", (double) nbcons);
-		
+		statistiques.put("consultations", String.valueOf(nbcons));
+		preStat.close();
+		//
 		String query3 = "SELECT COUNT(*) FROM consultation WHERE id_patient = ? and id_prescription is NOT NULL";
-		PreparedStatement preStat3 = connection.prepareStatement(query3);
-		preStat3.setInt(1, id_patient);
-		ResultSet result3 = preStat1.executeQuery();
-		result3.next();
-		int nbpresc = result3.getInt("COUNT(*)");
+		preStat = connection.prepareStatement(query3);
+		preStat.setInt(1, id_patient);
+		result = preStat.executeQuery();
+		result.next();
+		int nbpresc = result.getInt("COUNT(*)");
+		preStat.close();
 		
-		
-		
-		statistiques.put("prescriptions", (double) nbpresc);
-		
+		statistiques.put("prescriptions", String.valueOf(nbpresc));
+		preStat.close();
+		//
 		String query4 = "SELECT SUM(price) FROM consultation WHERE id_patient = ?";
-		PreparedStatement preStat4 = connection.prepareStatement(query4);
-		preStat4.setInt(1, id_patient);
-		ResultSet result4 = preStat1.executeQuery();
-		result4.next();
-		double totalPrice = result4.getDouble(1);
+		preStat = connection.prepareStatement(query4);
+		preStat.setInt(1, id_patient);
+		result = preStat.executeQuery();
+		result.next();
+		double totalPrice = result.getDouble(1);
 		
-		statistiques.put("price", totalPrice);
+		statistiques.put("price", String.valueOf(totalPrice));
+		preStat.close();
 		System.out.print(statistiques);
+		
 		return statistiques;
 	}
 
