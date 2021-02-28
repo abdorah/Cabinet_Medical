@@ -16,7 +16,7 @@
      <!--lien dataTable.css-->
      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 
-     <title>Liste Rendez-Vous</title>
+     <title>Liste des rendez-Vous</title>
     </head>
 
     <%@ page import = "com.javaBeans.Appointment" %>
@@ -49,25 +49,23 @@
 		%>
 
         <!-- Page Heading -->
-        <p class="mb-4">
-        	Voici Tout les Rendez-Vous  
-        </p>
-
+        <h1 class="h3 mb-2 text-gray-800"><b>Liste des rendez-vous</b></h1>
+		 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">les Rendez-Vous</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Informations des rendez-Vous</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Nom de patient</th>
-                                <th>Date fait</th>
+                                <th>Nom et prénom</th>
+                                <th>Date de prise </th>
                                 <th>Date rendez-vous</th>
                                 <th>Description</th>
-                                <th>Type de malade</th>
+                                <th>Type de maladie</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

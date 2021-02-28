@@ -16,7 +16,7 @@
      <!--lien dataTable.css-->
      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 
-     <title>Liste patients</title>
+     <title>Liste des patients</title>
     </head>
 
     <%@ page import = "com.javaBeans.Patient" %>
@@ -60,14 +60,14 @@
 	%>
 			
             <!-- Page Heading -->
-            <p class="mb-4">
-            	Voici Tout les patients  
-            </p>
+            
+             <h1 class="h3 mb-2 text-gray-800"><b>Liste des patients </b></h1>
 	
 	        <!-- DataTales Example -->
 	        <div class="card shadow mb-4">
 	            <div class="card-header py-3">
-	                <h6 class="m-0 font-weight-bold text-primary">les Pations</h6>
+	            
+	                <h6 class="m-0 font-weight-bold text-primary">Informations des patients</h6>
 	            </div>
 	            <div class="card-body">
 	                <div class="table-responsive">
@@ -76,11 +76,11 @@
 	                            <tr>
 	                            	<th>CIN</th>
 	                                <th>Nom</th>
-	                                <th>Prenom</th>
+	                                <th>Prénom</th>
 	                                <th>Email</th>
 	                                <th>Numéro</th>
 	                                <th>Date naissance</th>
-	                                <th>Sex</th>
+	                                <th>Genre</th>
 	                                <th>Actions</th>
 	                            </tr>
 	                        </thead>
