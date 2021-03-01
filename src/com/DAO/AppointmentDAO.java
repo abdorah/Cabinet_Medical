@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import com.javaBeans.Appointment;
 import com.javaBeans.Patient;
@@ -79,6 +78,22 @@ public class AppointmentDAO implements AppointmentService {
 		return isDelete;
 
 	}
+	
+	public int getAppointmentByDate(String date_app) throws SQLException {
+		connection = dbInstance.getConnection();
+
+		String query = "SELECT * FROM appointment WHERE DateofAppointment = ?;";
+		PreparedStatement preStat = connection.prepareStatement(query);
+		preStat.setString(1, date_app);
+		
+		ResultSet result = preStat.executeQuery();
+
+		if (result.next()) {
+			return 1;
+		}
+		return 0;
+	}
+	
 	@Override
 	public boolean takeAppointment(Appointment appointment) throws SQLException {
 		String query = "insert into appointment(DateofChecking, DateofAppointment, id_patient, TypeofIllness, Description, notification) values(NOW(),?,?,?,?,?);";
