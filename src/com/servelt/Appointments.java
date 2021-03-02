@@ -45,17 +45,37 @@ public class Appointments extends HttpServlet {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-
+        
+        int result = 0 ;
         try {
-            Patient patient = patientDao.getPatientById(user.getId_user());
-            Appointment appointment = new Appointment(date, description, typeofIllness, false, patient);
-            
-            appointmentDao.takeAppointment(appointment);
-            
-        } catch (SQLException e2) {
-            e2.printStackTrace();
+			result = appointmentDao.getAppointmentByDate(date);;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        if(result == 0) {
+
+	        try {
+	            Patient patient = patientDao.getPatientById(user.getId_user());
+	            Appointment appointment = new Appointment(date, description, typeofIllness, false, patient);
+	            
+	            appointmentDao.takeAppointment(appointment);
+	            
+	        } catch (SQLException e2) {
+	            e2.printStackTrace();
+	        }
+	        
+	        request.setAttribute("action", "effectue");
+	        this.getServletContext().getRequestDispatcher("/WEB-INF/home_patient.jsp").forward(request, response);
         }
-        request.setAttribute("action", "effectue");
-        this.getServletContext().getRequestDispatcher("/WEB-INF/home_patient.jsp").forward(request, response);
+        else {
+        	request.setAttribute("action", "refuse");
+        	request.setAttribute("type", typeofIllness);
+        	request.setAttribute("desc", description);
+	        doGet(request,response);
+        }
     }
+    
 }
