@@ -19,7 +19,7 @@
     </head>
     <body id="body-pd">
     	 <!--===== SIDE BAR =====-->
-    	<%@ include file="side-bar.jsp" %>
+    	<%@ include file="side-bar_doctor.jsp" %>
     
         <div class="container-fluid" style="margin-top: 100px;">
 
