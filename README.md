@@ -41,7 +41,7 @@ Le but de ce projet est de concevoir et de développer une application qui perme
             <td></td>
         </tr>
         <tr>
-            <td>Bootsrap</td>
+            <td>Bootstrap</td>
             <td></td>
             <td></td>
         </tr>
