@@ -1,0 +1,25 @@
+Les besoins fonctionnels:
+	--> Acteur 1: Docteur
+		l'application permet au docteur de :
+			* S'authetifier
+			* Consulter les nouvelles notifications concernant les rendez-vous
+			* Visualiser les statistiques concernant son cabinet(nombre des patients,nombre des rendez-vous prises...)
+			* Consulter la liste des patients avec le droit de :
+				* Modifier les informations du patient,
+				* Supprimer un patient
+				* Consulter le dossier médical du patient (informations personnelles,consultations,ordonnances)
+			* Voir la liste des rendez-vous (historiques,nouveaux rendez-vous)  
+	
+	--> Acteur 2 : Patient 
+		l'application permet au patient de :
+			* Créer un compte dans l'application
+			* S'authetifier
+			* Prendre un rendez-vous chez le docteur
+			* Voir son historique des rendez-vous 
+			* Consulter son dossier médical
+
+Les besoins non fonctionnels:
+	L'application doit être :
+		* Facile à utiliser
+		* Simple
+		* bien designée
