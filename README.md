@@ -81,6 +81,11 @@ Le but de ce projet est de concevoir et de développer une application qui perme
 
 ![](screenshots/add-consultations.png)
 
+* **Accueil du patient**
+
+![](screenshots/home-patients.png)
+
+
 * **Prendre un rendez-vous par le patient**
 
 ![](screenshots/take-appointment.png)
