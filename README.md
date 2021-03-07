@@ -1,7 +1,7 @@
 # ***Application de gestion de cabinet médical***
 
 #### **Contributeurs :**
-Ce projet est réalisé sous la collaboration de :
+Ce projet a été réalisé sous la collaboration de :
   
   * [Ayoub HMADOUCH ](https://github.com/AyoubHmadouch)
   * [Abdessamad EL HAFI](https://github.com/abdoelhafi)
