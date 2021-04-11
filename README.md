@@ -42,11 +42,13 @@ Le but de ce projet est de concevoir et de développer une application qui perme
             <td>Javascript</td>
             <td></td>
             <td></td>
+              <td></td>
         </tr>
         <tr>
             <td>Bootstrap</td>
             <td></td>
             <td></td>
+             <td></td>
         </tr>
     </tbody>
 </table>
