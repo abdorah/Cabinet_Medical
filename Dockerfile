@@ -13,7 +13,7 @@ RUN mvn package
 
 RUN cp -rf ./target/Cabinet_Medical-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
 
-FROM mysql:latest
+FROM mysql:debian
 
 ENV MYSQL_ROOT_PASSWORD=Strong@Independent1Password
 ENV MYSQL_DATABASE=bd_cabinetmedicale
