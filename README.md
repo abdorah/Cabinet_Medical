@@ -95,3 +95,11 @@ Le but de ce projet est de concevoir et de développer une application qui perme
 
 ![](screenshots/take-appointment.png)
 
+
+## How to use this project
+
+To run this application please run the following command:
+
+```sh
+docker compose -f 'docker-compose.yml' up -d --build 
+```

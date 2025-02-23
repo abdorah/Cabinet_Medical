@@ -1,17 +1,24 @@
-version: '2.2'
-services: 
-    web:
-        build: .
-        ports:
-         - "8080:8080"
+version: '3.8'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Strong@Independent1Password
+      MYSQL_DATABASE: bd_cabinetmedicale
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Strong@Independent1Password
+    ports:
+      - "3306:3306"
+
+  tomcat:
+    image: tomcat:8.5-jdk11
+    container_name: tomcat_server
+    restart: always
     depends_on:
-      - db
-
-    db:
-        image: mysql
-        environment:
-         MYSQL_ROOT_PASSWORD: root
-         MYSQL_DATABASE: bd_cabinetmedicale
-
-        ports:
-         - "3306:3306" 
+      - mysql
+    volumes:
+      - ./target/Cabinet_Medical-0.0.1-SNAPSHOT:/usr/local/tomcat/webapps/Cabinet_Medical-0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
